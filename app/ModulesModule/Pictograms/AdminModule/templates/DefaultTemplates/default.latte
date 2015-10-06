@@ -1,0 +1,43 @@
+<style>
+    div.radio {
+        float: left;
+        width: 30%;
+    }
+    div.pictogram .panel-body .glyphicon{
+        font-size: 100px;
+        margin-bottom: 40px;
+        margin-top: 40px;
+    }
+</style>
+
+<div class="page-header">
+    <h2>Vytvořit nový piktogram</h2>
+</div>
+{$addForm}
+
+{if ($pictograms->count() > 0)}
+    <div class="page-header">
+        <h2>Seznam vytvořených piktogramů <small>(celkem {$pictograms->count()})</small></h2>
+    </div>
+    {foreach $pictograms as $pictogram}
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 center pictogram">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3><span class="{$pictogram->icon}" aria-hidden="true"></span></h3>
+                    <p>{$pictogram->text|noescape}</p>
+                    <p><a href="{$pictogram->link}">{$pictogram->link}</a></p>
+                </div>
+                <div class="panel-footer">
+                    <a n:href="{$module->class_name}:Edit $pictogram->id, parent_page_id => $module->page_id" class="btn" alt="Upravit" title="Upravit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        {if (1 == $pictogram->enabled)}
+                        <a n:href="{$module->class_name}:EnableDisablePictogram $pictogram->id, parent_page_id => $module->page_id" class="btn" alt="Nezobrazovat na webu" title="Nezobrazovat"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span></a>
+                        {else}
+                        <span class="label label-danger">Nezobrazuje se.</span>
+                        <a n:href="{$module->class_name}:EnableDisablePictogram $pictogram->id, parent_page_id => $module->page_id" class="btn" alt="Opět zobrazovat na webu" title="Opět zobrazovat na webu"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                        {/if}
+                    <a n:href="{$module->class_name}:DeletePictogram $pictogram->id, parent_page_id => $module->page_id" class="btn confirmation" alt="Smazat" title="Smazat"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                </div>
+            </div>
+        </div>
+    {/foreach}
+{/if}

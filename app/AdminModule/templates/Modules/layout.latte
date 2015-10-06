@@ -1,0 +1,38 @@
+<div class="module panel panel-default{if ($moduleMaximalized)} module-maximalized{/if}" id="module-{$module->id}">
+    <div class="panel-heading">
+        <h3>{$module->name}</h3>
+            <span class="pull-right options">
+                {if ($numberOfModules > 1)}
+                    {if ($module->position >= 1 && $module->position < $numberOfModules)}
+                        <a n:href="{$module->class_name}:MoveModuleDown $module->id" ><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></a>
+                    {/if}
+                    {if ($module->position <= $numberOfModules && $module->position > 1)}
+                        <a n:href="{$module->class_name}:MoveModuleUp $module->id" ><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a>
+                    {/if}
+                {/if}
+                <div class="minimalize-maximalize">
+                    <a href="javascript:return false;" class="minimalize" alt="Minimalizovat modul." title="Minimalizovat modul."><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>
+                    <a href="javascript:return false;" class="maximalize" alt="Otevřit modul." title="Otevřit modul."><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a>
+                </div>
+            </span>
+        {if (!$module->enabled)}
+            <span class="label label-danger">Modul je pozastaven.</span> <a n:href="{$module->class_name}:EnableDisable $module->id" class="btn confirmation">Opět spustit modul</a>
+        {/if}
+    </div>
+    <div class="panel-body">
+        {if $module->settings->count() > 0}
+            <div class="page-header">
+                <h2>Nastavení</h2>
+                {$settingsForm}
+            </div>
+        {/if}
+        {$content}
+    </div>
+    <div class="panel-footer">
+        {if ($module->enabled)}
+            <a n:href="{$module->class_name}:EnableDisable $module->id" class="btn btn-warning confirmation">Pozastavit modul</a>
+        {/if}
+        <a n:href="{$module->class_name}:Delete $module->id" class="btn btn-danger pull-right confirmation">Smazat tento modul</a>
+        <br style="clear: both" />
+    </div>
+</div>

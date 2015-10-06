@@ -1,0 +1,62 @@
+php:
+        date.timezone: Europe/Prague
+        # zlib.output_compression: yes
+
+
+# --- parameters -----------------------------------------------------------
+parameters:
+        database:
+                default:
+                        driver: mysql
+                        host: localhost
+                        dbname: dbname
+                        user: user
+                        password: password
+
+# --- nette config ---------------------------------------------------------
+nette:
+        application:
+                errorPresenter: Error
+                mapping:
+                        *: App\*Module\Presenters\*Presenter
+
+        database:
+                default:
+                        dsn: '%database.default.driver%:host=%database.default.host%;dbname=%database.default.dbname%'
+                        user: %database.default.user%
+                        password: %database.default.password%
+                        options:
+                                lazy: yes
+
+        session:
+                expiration: 14 days
+
+
+# --- services -------------------------------------------------------------
+services:
+        #- App\Model\UserManager
+        - App\RouterFactory
+        authenticator: Nette\Security\SimpleAuthenticator([
+                user: password
+                user2: password2
+            ])
+#        database: @nette.database.default
+        router: @App\RouterFactory::createRouter
+        settings: App\Model\Settings
+        page: App\Model\Page
+        pageModules: App\Model\PageModules
+        pageModuleRegister: App\Model\PageModuleRegister
+        pageModuleInstance: App\Model\PageModuleInstance
+        modulesSettings: App\Model\ModulesSettings
+#       models for Modules:
+        moduleTextEditorModel: App\Model\ModuleTextEditor
+        moduleContactFormModel: App\Model\ModuleContactForm
+        moduleGuestBookModel: App\Model\ModuleGuestBook
+        moduleImageGaleryModel: App\Model\ModuleImageGalery
+        moduleReferenceModel: App\Model\ModuleReference
+        moduleEmailGathererModel: App\Model\ModuleEmailGatherer
+        moduleFeaturingModel: App\Model\ModuleFeaturing
+        moduleSimpleGoogleMapsModel: App\Model\SimpleGoogleMaps
+        modulePictogramsModel: App\Model\Pictograms
+        moduleInsertCodeModel: App\Model\InsertCode
+        moduleCarouselBootstrap3Model: App\Model\CarouselBootstrap3

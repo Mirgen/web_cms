@@ -1,0 +1,71 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of PageModules
+ *
+ * @author Jiri Kvapil
+ */
+namespace App\Model;
+
+
+class PageModules extends Base {
+    /** @var string */
+    protected $tableName = 'page_modules';
+
+    public function getAllActivePageModules() {
+        $aParameters = array('enabled' => 1);
+        $oPageModules = $this->findBy($aParameters);
+        return $oPageModules;
+    }
+
+    public function getPageModulesForSelect() {
+        $oPageModules = $this->getAllActivePageModules();
+        $aPageModules = array();
+
+        foreach($oPageModules as $oPageModule) {
+            $aPageModules[$oPageModule->id] = $oPageModule->name;
+        }
+        return $aPageModules;
+    }
+
+    public function getModule($iModuleId){
+        return $this->findOneBy(array('id' => $iModuleId));
+    }
+
+    public function loadClass($iModuleId){
+        $module = $this->getModule($iModuleId);
+        $class = 'App\AdminModule\Presenters\\' . $module->class_name.'Presenter';
+        return new $class;
+    }
+
+    public function loadAdminModules($iPageId){
+        $query =  " SELECT pm.name, pm.class_name, pmi.id as id, pmp.position, pmp.enabled, pmp.page_id, pmp.id as occurence_id, pm.id as class_id "
+                . " FROM page_modules_presence pmp "
+                . " LEFT JOIN page_modules_instance pmi ON (pmp.page_module_instance_id = pmi.id) "
+                . " LEFT JOIN page_modules pm ON (pm.id = pmi.module_id) "
+                . " WHERE pmp.page_id = $iPageId "
+                . " ORDER BY position ASC ";
+        $modules = $this->query($query);
+
+        return $modules;
+    }
+
+    public function loadFrontModules($iPageId){
+        $query =  " SELECT pm.class_name, pmi.id as id, pmp.position, pmp.enabled, pmp.page_id, pmp.id as occurence_id, pm.id as class_id "
+                . " FROM page_modules_presence pmp "
+                . " LEFT JOIN page_modules_instance pmi ON (pmp.page_module_instance_id = pmi.id) "
+                . " LEFT JOIN page_modules pm ON (pm.id = pmi.module_id) " 
+                . " WHERE pmp.page_id = $iPageId "
+                . " AND pmp.enabled = 1 "
+                . " AND pm.enabled = 1 "
+                . " ORDER BY position ASC ";
+        $modules = $this->query($query);
+        return $modules;
+    }
+}

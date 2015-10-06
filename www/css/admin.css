@@ -1,0 +1,49 @@
+/* 
+    Created on : 7.7.2015, 17:03:34
+    Author     : Jiri Kvapil
+*/
+h2 {
+    margin-bottom: 30px
+}
+table table{
+    margin: 20px
+}
+ul.sortable-images{
+    padding: 0;
+    margin: 0;
+    list-style-type: none
+}
+ul.sortable-images li img{
+    cursor: move
+}
+.module>.panel-body, .module>.panel-footer{
+    display: none
+}
+.module .panel-heading h3 {
+    display: inline
+}
+.module .panel-heading .options {
+    font-size: 20px
+}
+.module .panel-heading .minimalize-maximalize{
+    float: right;
+    padding: 0 15px 0 20px;
+    margin-left: 15px;
+    border-left: 1px solid #ddd
+}
+.module .panel-heading .minimalize-maximalize .minimalize {
+    display: none
+}
+.module-maximalized>.panel-body,
+.module-maximalized>.panel-footer {
+    display: block
+}
+.module-maximalized .panel-heading .minimalize-maximalize>.minimalize {
+    display: block
+}
+.module-maximalized .panel-heading  .minimalize-maximalize>.maximalize {
+    display: none
+}
+.center {
+    text-align: center
+}

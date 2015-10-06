@@ -1,0 +1,33 @@
+<div class="module">
+    <div class="block block-main-slideshow">
+      <div id="myCarousel{$module->id}" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            {for $i = 0; $i < $items->count(); $i++}
+                <li data-target="#myCarousel{$module->id}" data-slide-to="{$i}" {if $i == ($module->settings->active - 1)}class="active"{/if}></li>
+            {/for}
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div n:foreach="$items as $item" class="item {if $iterator->counter == $module->settings->active}active{/if}" style="background-image:url('{$basePath}/images/modulecarouselbootstrap3/{$module->page_id}/{$item->image}');">
+                <div class="carousel-caption">
+                    <h2>{$item->title}</h2>
+                    <h3>{$item->subtitle}</h3>
+                    <p>{$item->text}</p>
+                    {if $item->link}
+                        <p><a class="btn btn-lg btn-primary" href="{$item->link}" role="button">{if $item->link_text}{$item->link_text}{else}Více{/if}</a></p>
+                    {/if}
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel{$module->id}" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel{$module->id}" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+      </div><!-- /.carousel --> 
+      <div class="clearboth"></div>
+    </div>
+</div>

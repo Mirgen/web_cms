@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="module">
+        <h3 id="guestBook{$moduleId}">Diskuzní kniha</h3>
+        <form method="post" action="{$addPostLink}" validate>
+            <div class="container">
+                <div class="form-group">
+                    <label for="guestBookName{$moduleId}">Jméno</label>
+                    <input type="text" name="name" class="form-control" id="guestBookName{$moduleId}" required="required" placeholder="Jméno">
+                </div>
+                <div class="form-group">
+                    <label for="guestBookNameEmail{$moduleId}">E-mailová adresa</label>
+                    <input type="text" name="email" class="form-control" id="guestBookNameEmail{$moduleId}" required="required" placeholder="E-mailová adresa">
+                </div>
+                <div class="form-group">
+                    <label for="guestBookText{$moduleId}">Text zprávy</label>
+                    <textarea class="form-control" rows="2" id="guestBookText{$moduleId}" required="required" name="text"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" name="submit" value="Odeslat" />
+                </div>
+            </div>
+         </form>
+
+        <div n:foreach="$guestBookPosts as $post" class="panel panel-default">
+            <div class="panel-body">
+                <h4 class="media-heading">{$post->name} • {$post->email} • <span class="datetime">{$post->timestamp}</span></h4>
+                <p>{$post->text}</p>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

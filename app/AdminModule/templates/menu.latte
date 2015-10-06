@@ -1,0 +1,36 @@
+<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Administrace</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a>Uvodní stránka</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Úprava stránek<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a n:href="Page:default">Seznam stránek</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Naposled otevřené</li>
+                    {if $latestPages}
+                        {foreach $latestPages as $page}
+                            <li><a n:href="Page:edit, id => $page['id']">{$page['name']}</a></li>
+                        {/foreach}
+                    {/if}
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Rychlá akce</li>
+                    <li><a n:href="Page:add">Přidat novou</a></li>
+                </ul>
+            </li>
+        </ul>
+        <a n:href="Sign:out" class="btn btn-danger navbar-btn pull-right" style="color:white">Odhlásit</a>
+        <p class="navbar-text pull-right">Uživatel {$user->getId()}</p>
+      </div>
+    </div>
+</div>

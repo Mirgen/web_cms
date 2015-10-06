@@ -1,0 +1,8 @@
+<form method="post" action="{link ModuleContactForm:Save, $module->id, parent_page_id => $module->page_id}">
+    <label for="email{$module->id}">Zadejte e-mailovou adresu, na kterou bude formulář odesílán:</label>
+    <input type="email" class="form-control" name="email" value="{$moduleData->email}" id="email{$module->id}" placeholder="Email" />
+    <label for="message_ok{$module->id}">Potvrzovací zpráva (zobrazí se návštěvníkům stránek po odeslání formuláře):</label>
+    <input type="text" class="form-control" name="message_ok" value="{$moduleData->message_ok}" id="message_ok{$module->id}" />
+    <br />
+    <input type="submit" class="btn btn-primary" name="submit" value="Uložit" />
+</form>

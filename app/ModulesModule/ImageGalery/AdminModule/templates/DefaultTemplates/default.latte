@@ -1,0 +1,24 @@
+{$imageGaleryForm}
+<ul class="sortable-images" data-url="{$updateOrderUrl}">
+    {foreach $images as $image}
+        <li id="img_{$image->id}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div>
+                <img src="{$basePath}/images/{$moduleDirectory}/{$module->page_id}/{$image->name}.{$image->extension}" alt="{$image->description}" title="{$image->description}" class="img-thumbnail" />
+                <a n:href="{$module->class_name}:DeleteImage $image->id, parent_page_id => $module->page_id" class="btn confirmation" alt="Smazat obrázek" title="Smazat obrázek">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </a>
+
+                {if (1 == $image->enabled)}
+                    <a n:href="{$module->class_name}:EnableDisableImage $image->id, parent_page_id => $module->page_id" class="btn" alt="Zastavit zobrazování obrázků" title="Zastavit zobrazování obrázků">
+                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    </a>
+                {else}
+                    <span class="label label-danger">Nezobrazuje se.</span>
+                    <a n:href="{$module->class_name}:EnableDisableImage $image->id, parent_page_id => $module->page_id" class="btn" alt="Opět zobrazit obrázek" title="Opět zobrazit obrázek">
+                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                    </a>
+                {/if}
+            </div>
+        </li>
+    {/foreach}
+</ul>

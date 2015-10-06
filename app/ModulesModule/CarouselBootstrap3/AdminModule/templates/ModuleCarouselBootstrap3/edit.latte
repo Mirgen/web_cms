@@ -1,0 +1,12 @@
+{block content}
+<div class="container">
+    <h2>Úprava</h2>
+    <div  style="text-align: center">
+        {if $image}
+            <img src="{$basePath}/images/{$module->class_name|lower}/{$module->page_id}/{$image}" alt="" title="" class="img-thumbnail" style="margin: 0 auto;" /><br />
+            <a href="{$deleteImgUrl}" class="btn confirmation" alt="Smazat obrázek" title="Smazat obrázek"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Smazat současný obrázek</a>
+        {/if}
+    </div>
+    {control editForm}
+</div>
+{/block}

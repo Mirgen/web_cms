@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="module">
+        <div n:foreach="$images as $image" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <a href="{$basePath}/images/module_image_galery/{$pageId}/{$image->name}.{$image->extension}" class="imageGalery">
+                <img src="{$basePath}/images/module_image_galery/{$pageId}/{$image->name}_t.{$image->extension}" alt="{$image->description}" title="{$image->description}" class="img-thumbnail" />
+            </a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

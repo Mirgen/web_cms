@@ -1,0 +1,5 @@
+<form method="post" action="{link ModuleTextEditor:Save, $module->id, parent_page_id => $module->page_id}">
+    <textarea name="text" rows="20" class="tinymce_text_editor">{$moduleData->text}</textarea>
+    <br />
+    <input type="submit" class="btn btn-primary" name="submit" value="Uložit" />
+</form>

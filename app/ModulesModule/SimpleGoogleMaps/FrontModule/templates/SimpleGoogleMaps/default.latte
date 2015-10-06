@@ -1,0 +1,64 @@
+<style>
+.overlay {
+    background: transparent;
+    position: absolute;
+    width: 100%;
+    height: 800px;
+    margin-top: 0px;
+    z-index: 999;
+}
+.carousel-inner .item .overlay {
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0px;
+    left:0px;
+    opacity: 0.1;
+    background: black
+}
+</style>
+<div class="container">
+    <div class="module" style="postition: relative;">
+        <h2>Kde mě najdete</h2>
+        <p>{$address}</p>
+        <div class="overlay" onClick="style.pointerEvents='none'"></div>
+        <div id="map_canvas" style="width: 100%; height: 700px"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+    var geocoder;
+    var map;
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(-34.397, 150.644);
+        var myOptions = {
+            zoom: 16,
+            center: latlng,
+            panControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP //ROADMAP SATELLITE
+        }
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    }
+
+    function codeAddress(address) {
+        //var address = document.getElementById("address").value;
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map, 
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
+    }
+
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            initialize();  // google map initialize
+            codeAddress({$address});
+        });
+</script>

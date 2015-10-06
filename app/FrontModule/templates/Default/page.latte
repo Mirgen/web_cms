@@ -1,0 +1,19 @@
+
+
+{block content}
+    {foreach $modules as $module}
+        {$module|noescape}
+    {/foreach}
+{/block}
+
+{block scripts}
+{include parent}
+<script>
+
+</script>
+{/block}
+
+
+{block head}
+
+{/block}

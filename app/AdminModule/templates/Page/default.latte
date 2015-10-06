@@ -1,0 +1,22 @@
+
+
+{block content}
+<div class="container">
+    <h1 n:block=title>Seznam stránek</h1>
+    <p><a n:href="Page:add">Přidat novou</a></p>
+    {$pagesTable|noescape}
+    <p><a n:href="Page:add">Přidat novou</a></p>
+</div>
+{/block}
+
+{block scripts}
+{include parent}
+<script>
+
+</script>
+{/block}
+
+
+{block head}
+
+{/block}

@@ -1,0 +1,12 @@
+{block content}
+<div class="container">
+    <h2>Úprava reference</h2>
+    <div  style="text-align: center">
+        {if $imageName}
+            <img src="{$basePath}/images/module_reference/{$moduleId}/{$imageName}" alt="" title="" class="img-thumbnail" style="margin: 0 auto;"><br />
+            <a href="{$deleteImgUrl}" class="btn confirmation" alt="Smazat obrázek" title="Smazat obrázek"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Smazat současný obrázek</a>
+        {/if}
+    </div>
+    {control editForm}
+</div>
+{/block}

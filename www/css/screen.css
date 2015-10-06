@@ -1,0 +1,250 @@
+body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333;
+    background: white;
+    padding-top: 150px;
+}
+#ajax-spinner {
+    margin: 15px 0 0 15px;
+    padding: 13px;
+    background: white url('../images/spinner.gif') no-repeat 50% 50%;
+    font-size: 0;
+    z-index: 123456;
+    display: none;
+}
+.center {
+    text-align: center
+}
+div.flash {
+    color: black;
+    background: #FFF9D7;
+    border: 1px solid #E2C822;
+    padding: 1em;
+    margin: 1em 0;
+}
+
+a[href^="#error:"] {
+    background: red;
+    color: white;
+}
+
+form th, form td {
+    vertical-align: top;
+    font-weight: normal;
+}
+
+form th {
+    text-align: right;
+}
+
+form .required label {
+    font-weight: bold;
+}
+
+form .error {
+    color: #D00;
+    font-weight: bold;
+}
+
+html.js .jshidden {
+    display: none;
+}
+body {
+    padding-bottom: 0px;
+}
+a {
+    color: black
+}
+a:hover {
+    color: black
+}
+a.logo {
+    border: none
+}
+a.logo:hover {
+    border: none
+}
+.navbar {
+    margin-bottom:0 
+}
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: black
+}
+.clearboth {
+    width: 100%;
+    height: 1px;
+    display: block;
+    clear: both;
+}
+a.block {
+    display: block;
+}
+a.block:hover {
+    text-decoration: none
+}
+/* make keyframes that tell the start state and the end state of our object */
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fade-in {
+    opacity:0;  /* make things invisible upon start */
+    -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation:fadeIn ease-in 1;
+    animation:fadeIn ease-in 1;
+
+    -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    -moz-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
+
+    -webkit-animation-duration:1s;
+    -moz-animation-duration:1s;
+    animation-duration:1s;
+}
+
+.fade-in.one {
+    -webkit-animation-delay: 0.7s;
+    -moz-animation-delay: 0.7s;
+    animation-delay: 0.7s;
+} 
+.hideme
+{
+    opacity:0;
+}    
+.promo img {
+    width: 200px;
+    height: 200px      
+}
+hr {
+    border-top: 1px solid #eee;
+}
+hr.featurette-divider {
+    width: 80%;
+    margin: 0 auto
+}    
+hr.divider {
+    padding-bottom: 200px
+}    
+h2 {    
+    margin-bottom: 30px;
+}  
+.feature-images img{
+    width: 100%;
+    height: 100%
+}  
+.feature-images h3{
+    text-align: center;
+    height: 50px
+}     
+.feature-images > div{
+    text-align: center;
+    padding: 10px
+}
+.carousel-inner .item {
+    background-position: center center
+}
+#footer .navbar-nav>li>a, #footer .navbar-nav>li>ul>li>a {
+    color: white
+}
+#footer .navbar-nav>li>ul>li {
+    list-style-type: none;
+    text-align: left
+}
+#footer .navbar-nav>li>a:hover, #footer .navbar-nav>li>ul>li>a:hover{
+    background: none;
+    text-decoration: underline
+}
+#footer .dropdown-menu {
+    position: inherit; 
+    display: block; 
+    background-color: inherit; 
+    background-clip: padding-box; 
+    border: 0; 
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.more {
+    width: 200px;
+    height: 200px;
+    padding: 40px 10px 40px 70px;
+    font-size: 20px;
+    display: inline-block;
+    background: black;
+}
+.more a {
+    color: white
+}
+div.block {
+    postition: relative;
+    margin: 0 0 130px 0
+}
+.block-main-slideshow{
+    height: 800px
+}
+.block-main-slideshow .carousel{
+    height: 800px;
+}   
+.block-main-slideshow .carousel .item{
+    height: 800px;
+}  
+.block-main-slideshow h2 {
+    font-size: 80px
+}
+.block-main-slideshow h3 {
+    font-size: 40px
+}
+.spoluprace {
+    margin-top: 100px;
+    font-size: 18px
+}
+.spoluprace .glyphicon{
+    font-size: 100px;
+    margin-bottom: 40px;
+    margin-top: 40px
+}
+.spoluprace .feature{
+    text-align: center;
+    padding: 30px;
+}
+@media (max-width:768px){
+    .spoluprace .feature{
+        padding: 0px;
+    }
+}
+.carousel-white .item {
+    background: white
+}
+.carousel-white .carousel-caption {
+    color: black;
+    text-shadow: none;
+}    
+.carousel-white .carousel-caption p {
+    font-size: 15px;
+    text-shadow: 0;
+}      
+.carousel-white .carousel-indicators li {
+    border: 1px solid black;
+}
+.carousel-white .carousel-control {
+    color: black;
+    opacity: 1;
+}    
+.carousel-white .carousel-control.right, .carousel-white .carousel-control.left {
+    background: none
+} 
+.mandatory-star {
+    color: red;
+    font-size: 20px;
+    padding: 0 10px 0 10px;
+    font-weight: bold
+}
+.module {
+    margin-top: 150px;
+    padding-bottom: 150px;
+    border-bottom: 1px solid #eee;
+}
+.module h2{
+    font-size: 50px
+}

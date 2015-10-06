@@ -1,0 +1,45 @@
+<div class="page-header">
+    <h2>E-mailové adresy přihlášené k odběru novinek <small>(celkem {$emails->count()})</small></h2>
+</div>
+<p>
+    <b>Tento modul neslouží pro odesílání samotných novinek. Slouží pouze pro sběr e-mailových adres.</b> Pro odesílání novinek tedy použijte váš oblíbený
+        e-mailový program. Například Outlook nebo on-line Gmail, Seznam a další. Jednoduše zkopírujte následující seznam e-mailových adres oddělených středníky 
+        a vložte do pole <b>"Skrytá kopie"</b>. Velmi doporučujeme <u>nedávat</u> tyto adresy do pole běžných neskrytých odesilatelů, neboť každý příjemce vašich 
+        novinek pak uvidí e-mailovou adresu všech ostatních příjemců!
+</p>
+<br />
+<b>Zkopírujte do "Skrytá kopie" při odesílání e-mailů:</b><br /><br />
+<div class="well well-lg">
+    {foreach $emails as $email}
+        {if $email->unsubscribed == 0}{$email->email}; {/if}
+    {/foreach}
+</div>
+
+<table class="table">
+    <caption>Seznam všech e-mailů zákazníků, kteří mají zájem o odběr vašich novinek.</caption>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>E-mail</th>
+            <th>Odhlášen</th>
+            <th colspan="2">Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+    {foreach $emails as $email}
+        <tr {if $email->unsubscribed == 1}class="danger"{/if}>
+            <th scope="row">{$iterator->counter}</th>
+            <td>{$email->email}</td>
+            <td>{if $email->unsubscribed == 1}ano{else}ne{/if}</td>
+            <td><a n:href="{$module->class_name}:DeleteEmail $email->id, parent_page_id => $module->page_id" class="btn confirmation" alt="Smazat email" title="Smazat email"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Smazat</a></td>
+            <td>
+                {if $email->unsubscribed == 1}
+                    <a n:href="{$module->class_name}:UnsubscribeEmail $email->id, parent_page_id => $module->page_id" class="btn confirmation" alt="Přihlásit email k odběru." title="Přihlásit email k odběru."><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Přihlásit k odběru</a>
+                {else}
+                    <a n:href="{$module->class_name}:UnsubscribeEmail $email->id, parent_page_id => $module->page_id" class="btn confirmation" alt="Odhlásit email z odběru novinek." title="Odhlásit email z odběru novinek."><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Odhlásit z odběru</a>
+                {/if}
+            </td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>

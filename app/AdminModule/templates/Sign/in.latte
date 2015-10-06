@@ -1,0 +1,56 @@
+{block head}
+<style>
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #eee;
+    }
+
+    div.container {
+      max-width: 550px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    div.container h1{
+      margin-bottom: 40px
+    }
+    .form-horizontal .form-horizontal-heading,
+    .form-horizontal .checkbox {
+      margin-bottom: 10px;
+    }
+    .form-horizontal .checkbox {
+      font-weight: normal;
+    }
+    .form-horizontal .form-control {
+      position: relative;
+      height: auto;
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .form-horizontal .form-control:focus {
+      z-index: 2;
+    }
+    .form-horizontal input[type="email"] {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .form-horizontal input[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+</style>
+{/block}
+
+{block content}
+    <div class="container">
+        <h1 n:block=title>Přihlášení</h1>
+        {control signInForm}
+
+        {* or use {include '../components/form.latte', form => signInForm} *}
+    </div>
+{/block}

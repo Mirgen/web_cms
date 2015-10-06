@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="module">
+        <div n:foreach="$features as $feature" class="col-xs-12 col-sm-4 col-md-3 col-lg-2 center">
+            {if $feature->link}
+                <a href="{$feature->link}" class="block">
+            {/if}
+                {if (isset($feature->imagename) && !empty($feature->imagename))}
+                    <img src="{$basePath}/images/module_featuring/{$moduleId}/{$feature->imagename}" alt="{$feature->title}" title="{$feature->title}" class="img-thumbnail img-circle">
+                {/if}
+                <h3>{$feature->title}</h3>
+                <p>{$feature->text|noescape}</p>
+            {if $feature->link}
+                </a>
+            {/if}
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>
