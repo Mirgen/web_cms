@@ -23,7 +23,8 @@ Instalation
 
 Modules
 ---------------------------------------------------------
-- available web modules, which you can use to build your web site
+Available web modules, which you can use to build your web site.
+
 1. Text on your web
 2. Contact form
 3. Guestbook
@@ -38,7 +39,7 @@ Modules
 
 Sub modules/features you can use
 ---------------------------------------------------------
-- Some features (CMS modules) are build on these but you DONT have to use them at all.
+Some features (CMS modules) are build on these but when you will create your own modules you DONT have to use them at all.
 
 PHP
 - Adminer - for your work with database (https://www.adminer.org/)
