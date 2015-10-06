@@ -1,7 +1,11 @@
 WEB CMS
 =========================================================
 
-Content Management System based on PHP framework Nette (https://nette.org/). Only 4 steps to start using it.
+Classic web Content Management System based on PHP framework Nette (https://nette.org/). Only 4 steps to start using it. System uses its modules which you can use to build a web site. 
+
+Consists of 
+- front part - which the visitors of your web site will see
+- admin part - for you and your client to manage content of the web site, accesible by link your-web-site/admin
 
 Instalation
 ---------------------------------------------------------
