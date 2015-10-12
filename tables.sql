@@ -37,7 +37,7 @@ CREATE TABLE `module_contact_form` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `page_page_modules_id` int(11) unsigned NOT NULL,
   `email` varchar(256) COLLATE utf8_general_ci DEFAULT NULL,
-  `message_ok` varchar(256) COLLATE utf8_general_ci NOT NULL DEFAULT 'Email byl odeslÃ¡n.',
+  `message_ok` varchar(256) COLLATE utf8_general_ci NOT NULL DEFAULT 'Email byl odeslán.',
   PRIMARY KEY (`id`),
   KEY `page_page_modules_id` (`page_page_modules_id`),
   CONSTRAINT `module_contact_form_ibfk_1` FOREIGN KEY (`page_page_modules_id`) REFERENCES `page_modules_instance` (`id`) ON DELETE CASCADE
@@ -174,6 +174,8 @@ CREATE TABLE `page` (
   CONSTRAINT `page_id_parent` FOREIGN KEY (`id_parent`) REFERENCES `page` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+INSERT INTO `page` (`id`, `name`, `title`, `seo_url_text`, `final_url_text`, `id_parent`, `order`, `online`, `deleted`) 
+VALUES ('1', 'Úvodní stránka', 'Úvodní stránka', 'Úvodní stránka', 'uvodni-stranka', NULL, '0', '1', '0');
 
 DROP TABLE IF EXISTS `page_modules`;
 CREATE TABLE `page_modules` (
