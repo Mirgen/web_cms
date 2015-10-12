@@ -186,6 +186,18 @@ CREATE TABLE `page_modules` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+INSERT INTO `page_modules` (`id`, `name`, `class_name`, `enabled`) VALUES
+(1,	'Text',	'ModuleTextEditor',	1),
+(2,	'Kontaktní formuláø',	'ModuleContactForm',	1),
+(3,	'Diskuzní kniha',	'ModuleGuestBook',	1),
+(4,	'Obrázková galerie',	'ModuleImageGalery',	1),
+(5,	'Reference',	'ModuleReference',	1),
+(6,	'Novinky e-mailem (sbìr e-mailù)',	'ModuleEmailGatherer',	1),
+(7,	'Pøedstavujeme',	'ModuleFeaturing',	1),
+(8,	'Google mapa',	'ModuleSimpleGoogleMaps',	0),
+(9,	'Piktogramy',	'ModulePictograms',	1),
+(10,	'Vložit kód do stránky',	'ModuleInsertCode',	1),
+(11,	'Prezentace Bootstrap 3',	'ModuleCarouselBootstrap3',	1);
 
 DROP TABLE IF EXISTS `page_modules_instance`;
 CREATE TABLE `page_modules_instance` (
