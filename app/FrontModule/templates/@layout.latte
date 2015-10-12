@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{ifset $title}{block title|striptags}{$title}{/block} | {/ifset}{block title_general|striptags}{$settings['title_general']}{/block}</title>
+    <title>{ifset $title}{block title|striptags}{$title}{/block} | {/ifset}{block title_general|striptags}{ifset $settings['title_general']}{$settings['title_general']}{/ifset}{/block}</title>
     <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
     <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/carousel.css">
     <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/colorbox.css">
