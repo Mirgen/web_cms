@@ -243,5 +243,3 @@ CREATE TABLE `settings` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
--- 2015-10-06 15:43:30
