@@ -28,7 +28,7 @@ class RouterFactory
                 'module' => 'front',
                 'presenter' => 'Default',
                 'action' => 'default',
-                'id' => 0
+                'id' => 1
             ), Route::ONE_WAY);
 
             $router[] =  new Route('admin/module/<moduleid>/<presenter>[/<action>[/<id>]]', array(
