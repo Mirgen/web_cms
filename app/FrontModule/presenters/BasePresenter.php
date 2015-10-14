@@ -23,7 +23,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     protected function startup() {
             parent::startup();
-            $this->cache = new Cache(new Nette\Caching\Storages\FileStorage('temp'));
+            $this->cache = new Cache(new Nette\Caching\Storages\FileStorage('../temp'));
 
             $this->loadPage();
 
