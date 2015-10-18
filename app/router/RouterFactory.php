@@ -17,7 +17,7 @@ class RouterFactory
 
         private $sPresenter = 'Default';
 
-        private $sAction = 'page';
+        private $sAction = 'default';
 
         /**
          * @return \Nette\Application\IRouter
@@ -28,7 +28,7 @@ class RouterFactory
                 'module' => 'front',
                 'presenter' => 'Default',
                 'action' => 'default',
-                'id' => 0
+                'id' => 1
             ), Route::ONE_WAY);
 
             $router[] =  new Route('admin/module/<moduleid>/<presenter>[/<action>[/<id>]]', array(
@@ -52,8 +52,8 @@ class RouterFactory
             $router[] = new Route('[<presenter>[/<action>]/]<id>', array(
                 'module' => 'front',
                 'presenter' => $this->sPresenter,
-                'action' => $this->sAction,
-                'id' => 0,
+                'action' => 'page',
+                'id' => 1,
             ));
 
             return $router;

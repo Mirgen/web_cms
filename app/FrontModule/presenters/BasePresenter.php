@@ -23,7 +23,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     protected function startup() {
             parent::startup();
-            $this->cache = new Cache(new Nette\Caching\Storages\FileStorage('temp'));
+            $this->cache = new Cache(new Nette\Caching\Storages\FileStorage('../temp'));
 
             $this->loadPage();
 
@@ -83,7 +83,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         foreach($oPages as $oPage) {
 
             // skip page with ID = 0, because it is index/homepage of the web
-            if($oPage->id == 0){
+            if($oPage->id == 1){
                 continue;
             }
 

@@ -24,7 +24,7 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
     protected $moduleTemplateDir = "DefaultTemplates";
 
-    protected $numberOfModules = 0;
+    protected $modulesCount = 0;
 
     protected $templateFile = "default.latte";
     
@@ -36,6 +36,10 @@ abstract class ModuleBasePresenter extends  BasePresenter
         // other pages in administration
         $this->setLayout('../../../../../AdminModule/templates/@layout');
         parent::beforeRender();
+    }
+
+    public function setModulesCount($count){
+        $this->modulesCount = $count;
     }
 
     private function loadTemplate()
@@ -51,7 +55,7 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
             /* Useful variables */
             $this->moduleTemplate->module = $this->module;
-            $this->moduleTemplate->numberOfModules = $this->oParentPresenter->numberOfModules;
+            $this->moduleTemplate->numberOfModules = $this->modulesCount;
             $this->moduleTemplate->settingsForm = $this->createComponentSettingsForm();
 
             $httpRequest = $this->oParentPresenter->getHttpRequest();
@@ -94,17 +98,6 @@ abstract class ModuleBasePresenter extends  BasePresenter
         preg_match('/Module([a-zA-Z0-9]+)Presenter$/', get_class($this), $matches);
         $this->moduleName = $matches[1];
         $this->loadModuleFromDB($moduleId);
-    }
-
-    public function loadModules(){
-        $modulesClasses = $this->context->pageModules->loadAdminModules($this->getParameter("id"));
-        $modules = array();
-        $this->numberOfModules = $modulesClasses->getRowCount();
-        foreach ($modulesClasses as $module){
-            $moduleClass = $this->context->pageModules->loadClass($module->class_id, $this->context);
-            $modules[] = html_entity_decode($moduleClass->load($module->id, $this));
-        }
-        return $modules;
     }
 
     protected function loadModuleFromDB($moduleId){

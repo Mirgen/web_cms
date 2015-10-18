@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{ifset $title}{block title|striptags}{$title}{/block} | {/ifset}{block title_general|striptags}{$settings['title_general']}{/block}</title>
+    <title>{ifset $title}{block title|striptags}{$title}{/block} | {/ifset}{block title_general|striptags}{ifset $settings['title_general']}{$settings['title_general']}{/ifset}{/block}</title>
     <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
     <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/carousel.css">
     <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/colorbox.css">
@@ -32,7 +32,7 @@
                     <span class="icon-bar"></span>
                   </button>
                     <a href="{link Default:page}" class="logo">
-                        <img src="{$basePath}/images/design/logo2.jpg"  alt="" />
+                        <h1>Website title or logo</h1>
                     </a>
                 </div>
                 <div class="navbar-collapse collapse" style="width: 70%; float: right; margin-top: 15px;">
@@ -52,16 +52,14 @@
                   {$menu|noescape}
               </div>
               <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                  <img src="{$basePath}/images/design/logo2-bile.png"  alt="" />
+                  <h2>Website title or logo</h2>
+                  <h3>Contact</h3>
                   <p>
-                  Stanislav Doleček<br />
-                  Na Výsluní 401<br />
-                  561 64 Jablonné nad Orlicí<br />
-                  IČ: 12981532<br />
-                  DIČ: CZ 5910170222<br />
-                  Mobil: +420 604 203 347<br />
-                  E-mail: dolecek.stanislav@email.cz<br />
-                  www.nabytekdolecek.cz<br />
+                  Prague 401x<br />
+                  859 54, Czech Republic<br />
+                  Tel.: +XXX ZZZ YYY III<br />
+                  E-mail: email@example.com<br />
+                  www.example.com<br />
                   </p>
               </div>
           </div>

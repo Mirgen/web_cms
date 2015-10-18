@@ -2,23 +2,29 @@
 
 namespace App\AdminModule\Presenters;
 
-use Nette,
-	App\Model,
-    Nette\Forms\Controls,
-    Nette\Application\UI;
+use Nette\Application\UI;
 
 
 /**
  * Homepage presenter.
  */
-class PagePresenter extends ModuleBasePresenter
+class PagePresenter extends BasePresenter
 {
     private $page = NULL;
 
-    public function numberOfModules()
-	{
-        return $this->numberOfModules;
+    private $modulesCount = 0;
+
+    public function loadModules(){
+        $modulesClasses = $this->context->pageModules->loadAdminModules($this->getParameter("id"));
+        $modules = array();
+        $this->modulesCount = $modulesClasses->getRowCount();
+        foreach ($modulesClasses as $module){
+            $moduleClass = $this->context->pageModules->loadClass($module->class_id, $this->context);
+            $moduleClass->setModulesCount($this->modulesCount);
+            $modules[] = html_entity_decode($moduleClass->load($module->id, $this));
 	}
+        return $modules;
+    }
 
     public function renderDefault()
 	{
@@ -62,7 +68,7 @@ class PagePresenter extends ModuleBasePresenter
                                     <td>' . $oPage->title . '</td>
                                     <td>' . $oPage->seo_url_text . '</td>
                                     <td><a href="' . $this->link('Page:edit',  $oPage->id)  . '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>';
-                                    if($oPage->id != 0){
+                                    if($oPage->id != 1){
                 $sHtml .=               '<td><a href="' . $this->link('Page:delete',  $oPage->id) . '" class="confirmation"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>';
                                     }
                 $sHtml .=       '</tr>
@@ -89,7 +95,7 @@ class PagePresenter extends ModuleBasePresenter
                                 <td>' . $oPage->title . '</td>
                                 <td>' . $oPage->seo_url_text . '</td>
                                 <td><a href="' . $this->link('Page:edit',  $oPage->id) . '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>';
-                                    if($oPage->id != 0){
+                                    if($oPage->id != 1){
                 $sHtml .=               '<td><a href="' . $this->link('Page:delete',  $oPage->id) . '" class="confirmation"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>';
                                     } else {
                 $sHtml .=               '<td></td>';
