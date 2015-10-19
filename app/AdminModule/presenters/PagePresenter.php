@@ -22,7 +22,7 @@ class PagePresenter extends BasePresenter
             $moduleClass = $this->context->pageModules->loadClass($module->class_id, $this->context);
             $moduleClass->setModulesCount($this->modulesCount);
             $modules[] = html_entity_decode($moduleClass->load($module->id, $this));
-	}
+        }
         return $modules;
     }
 
