@@ -46,7 +46,7 @@ class RouterFactory
             $router[] = new Route('<id [0-9]+>-<seo_url_text [0-9A-Za-z-/]+>', array(
                 'module' => 'front',
                 'presenter' => $this->sPresenter,
-                'action' => $this->sAction,
+                'action' => 'page',
                 'id' => NULL,
             ));
             $router[] = new Route('[<presenter>[/<action>]/]<id>', array(
