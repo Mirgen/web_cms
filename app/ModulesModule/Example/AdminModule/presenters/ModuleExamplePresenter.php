@@ -11,12 +11,12 @@ namespace App\AdminModule\Presenters;
  * @author Jiri Kvapil
  */
 
-class ModuleModuleNamePresenter extends ModuleBasePresenter
+class ModuleExamplePresenter extends ModuleBasePresenter
 {
     // module private variables, e.g. articles for Articles module
     private $articles = NULL;
 
-    protected function initialize()
+    public function initialize()
     {
         // add new setting available for the module
         // $this->addNewModuleSetting("Title", "key", "value");
@@ -39,7 +39,7 @@ class ModuleModuleNamePresenter extends ModuleBasePresenter
      */
 
     public function renderDelete($id){
-        $this->context->moduleModuleNameModel->deleteBy( array('page_page_modules_id' => $id) );
+        //$this->context->moduleModuleNameModel->deleteBy( array('page_page_modules_id' => $id) );
         parent::renderDelete($id);
     }
 

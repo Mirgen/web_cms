@@ -1,7 +1,7 @@
 <h2>Better to put form here</h2>
 <div n:foreach="$articles as $article" class="panel panel-default">
     <div class="panel-body">
-        <h4 class="media-heading">{$article->title}</h4>
-        <p>{$post->text}</p>
+        <h4 class="media-heading">{$article['title']}</h4>
+        <p>{$article['text']}</p>
     </div>
 </div>

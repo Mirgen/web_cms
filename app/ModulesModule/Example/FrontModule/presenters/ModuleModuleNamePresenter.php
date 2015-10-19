@@ -13,11 +13,11 @@ namespace App\FrontModule\Presenters;
  * @author Jiri Kvapil
  */
 
-class ModuleModuleNamePresenter extends ModuleBasePresenter
+class ModuleExamplePresenter extends ModuleBasePresenter
 {
     private $articles = "";
 
-    protected $moduleTemplateDir = "ModuleName";
+    protected $moduleTemplateDir = "Example";
 
     protected function loadModuleData(){
         if($this->oParentPresenter){
