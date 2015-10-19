@@ -10,5 +10,5 @@ namespace App\Model;
 
 class Menu extends Base {
     /** @var string */
-    protected $tableName = 'module_main_table_name';
+    protected $tableName = 'module_menu';
 }

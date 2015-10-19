@@ -1,7 +1,13 @@
 <h2>Better to put form here</h2>
-<div n:foreach="$articles as $article" class="panel panel-default">
+<div n:foreach="$menu as $item" class="panel panel-default">
     <div class="panel-body">
-        <h4 class="media-heading">{$article['title']}</h4>
-        <p>{$article['text']}</p>
+        <h4 class="media-heading">Heading</h4>
+        <p>{$item->id_page}</p>
+        <p>{$item->id_module}</p>
+        <p>{$item->module_text}</p>
+        <p>{$item->link}</p>
+        <p>{$item->link_text}</p>
+        <p>{$item->enabled}</p>
+        <p>{$item->order}</p>
     </div>
 </div>

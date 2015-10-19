@@ -14,23 +14,11 @@ namespace App\AdminModule\Presenters;
 class ModuleMenuPresenter extends ModuleBasePresenter
 {
     // module private variables, e.g. articles for Articles module
-    private $articles = NULL;
-
-    protected function initialize()
-    {
-        // add new setting available for the module
-        // $this->addNewModuleSetting("Title", "key", "value");
-        parent::initialize();
-    }
+    private $menu = NULL;
 
     protected function loadModuleData(){
         if($this->oParentPresenter){
-            // load artecles, e.g. from Database, file, etc.
-            $this->articles = array(
-                array("title" => "Article one", "text" => "Lorem ipsum dolor sit amet."),
-                array("title" => "Second article", "text" => "This is new article. Lorem ipsum dolor sit amet."),
-                array("title" => "Third article", "text" => "Hello. Lorem ipsum dolor sit amet."),
-            );
+            $this->menu = $this->oParentPresenter->context->moduleMenuModel->findBy(array('page_page_modules_id' => $this->module->id) )->order('order DESC');
         }
     }
 
@@ -39,11 +27,11 @@ class ModuleMenuPresenter extends ModuleBasePresenter
      */
 
     public function renderDelete($id){
-        //$this->context->moduleMenuModel->deleteBy( array('page_page_modules_id' => $id) );
+        $this->context->moduleMenuModel->deleteBy( array('page_page_modules_id' => $id) );
         parent::renderDelete($id);
     }
 
     public function loadContentTemplate(){
-        $this->moduleContentTemplate->articles = $this->articles;
+        $this->moduleContentTemplate->menu = $this->menu;
     }
 }
