@@ -16,7 +16,7 @@ class ModuleCarouselBootstrap3Presenter extends ModuleBasePresenter
     // module private variables, e.g. articles for Articles module
     private $slides = array();
 
-    protected function initialize()
+    public function initialize()
     {
         // add new setting available for the module
         $this->addNewModuleSetting("Který slide poběží první?", "active", 1);

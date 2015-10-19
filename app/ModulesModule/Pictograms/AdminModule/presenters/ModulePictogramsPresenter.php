@@ -287,7 +287,7 @@ class ModulePictogramsPresenter extends ModuleBasePresenter
                 "glyphicon glyphicon-menu-up", 
             );
 
-    protected function initialize()
+    public function initialize()
     {
         $this->addNewModuleSetting("Nadpis", "title", "Please change this title");
         parent::initialize();

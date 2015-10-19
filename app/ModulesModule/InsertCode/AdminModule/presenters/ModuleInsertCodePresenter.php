@@ -21,7 +21,7 @@ class ModuleInsertCodePresenter extends ModuleBasePresenter
 {
     private $code = "";
 
-    protected function initialize()
+    public function initialize()
     {
         $this->addNewModuleSetting("Nadpis", "title", "Zadejte nadpis.");
         parent::initialize();
