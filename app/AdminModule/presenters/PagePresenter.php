@@ -127,7 +127,7 @@ class PagePresenter extends BasePresenter
 
         $data["page_module_instance_id"] = $insertedModule->id;
         $data["enabled"] = 1;
-        /* Save module data related to the concrete page, One the same module can be on many pages */
+        /* Save module data related to the concrete page, One (the same) module can be on many pages */
         $this->context->pageModuleRegister->insert($data);
 
         $module = $this->context->pageModules->loadClass($page_module_id);
@@ -138,7 +138,7 @@ class PagePresenter extends BasePresenter
     public function addPageModuleToPageFormSucceeded(UI\Form $form, $values)
     {
         if($values['page_module_id'] == NULL) {
-            $this->flashMessage('Musíte vybrat modul, který bude přidán do stránky.', 'error');
+            $this->flashMessage('Musíte vybrat modul, který bude přidán do stránky.', 'danger');
             $this->redirect('Page:edit', array('id' => $this->getParameter('id')));
         } else {
 
