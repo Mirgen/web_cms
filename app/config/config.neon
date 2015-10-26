@@ -9,9 +9,9 @@ parameters:
                 default:
                         driver: mysql
                         host: localhost
-                        dbname: dbname
-                        user: user
-                        password: password
+                        dbname: web-cms-work
+                        user: web-cms-work
+                        password: web-cms-work
 
 # --- nette config ---------------------------------------------------------
 nette:
@@ -36,27 +36,5 @@ nette:
 services:
         #- App\Model\UserManager
         - App\RouterFactory
-        authenticator: Nette\Security\SimpleAuthenticator([
-                user: password
-                user2: password2
-            ])
 #        database: @nette.database.default
         router: @App\RouterFactory::createRouter
-        settings: App\Model\Settings
-        page: App\Model\Page
-        pageModules: App\Model\PageModules
-        pageModuleRegister: App\Model\PageModuleRegister
-        pageModuleInstance: App\Model\PageModuleInstance
-        modulesSettings: App\Model\ModulesSettings
-#       models for Modules:
-        moduleTextEditorModel: App\Model\ModuleTextEditor
-        moduleContactFormModel: App\Model\ModuleContactForm
-        moduleGuestBookModel: App\Model\ModuleGuestBook
-        moduleImageGaleryModel: App\Model\ModuleImageGalery
-        moduleReferenceModel: App\Model\ModuleReference
-        moduleEmailGathererModel: App\Model\ModuleEmailGatherer
-        moduleFeaturingModel: App\Model\ModuleFeaturing
-        moduleSimpleGoogleMapsModel: App\Model\SimpleGoogleMaps
-        modulePictogramsModel: App\Model\Pictograms
-        moduleInsertCodeModel: App\Model\InsertCode
-        moduleCarouselBootstrap3Model: App\Model\CarouselBootstrap3
