@@ -22,12 +22,11 @@ $(function(){
 
     });
 
-    $( ".sortable-images" ).sortable({
+    $( ".sortable" ).sortable({
       // configuration
       delay: 100,
       items: 'li',
       update: function(event, ui) {
-        console.log($(this).attr( "data-url" ));
         $.ajax({
             type: "POST",
             url: $(this).attr( "data-url" ),//"/admin/module-image-galery/update-order/",

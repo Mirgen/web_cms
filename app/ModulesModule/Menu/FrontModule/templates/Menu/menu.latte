@@ -1,0 +1,24 @@
+<ul {ifset $submenu} class="dropdown-menu" role="menu"{else}class="nav navbar-nav"{/ifset}>
+    {foreach $menu as $menuitem}
+        <li {if false === empty($menuitem->sub_menu)} class="dropdown"{/if}>
+            <a 
+            {if false === empty($menuitem->sub_menu)}
+                class="dropdown-toggle" data-toggle="dropdown" 
+            {/if}
+            {ifset $menuitem->module_id}
+                href="{link Default:page, 'id' => $menuitem->page_id, 'seo_url_text' => $menuitem->final_url_text}#mod-{$menuitem->module_id}">{$menuitem->link_text}
+            {elseifset $menuitem->link}
+                href="{$menuitem->link}">{$menuitem->link_text}
+            {elseifset $menuitem->page_id}
+                href="{link Default:page, 'id' => $menuitem->page_id, 'seo_url_text' => $menuitem->final_url_text}">{$menuitem->page_text}
+            {/ifset}
+            {if false === empty($menuitem->sub_menu)}
+                <span class="caret"></span>
+            {/if}
+            </a>
+            {if false === empty($menuitem->sub_menu)}
+                {include 'menu.latte', menu => $menuitem->sub_menu, submenu => true}
+            {/if}
+        </li>
+    {/foreach}
+</ul>

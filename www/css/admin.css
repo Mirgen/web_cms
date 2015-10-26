@@ -47,3 +47,6 @@ ul.sortable-images li img{
 .center {
     text-align: center
 }
+.movable {
+    cursor: move;
+}
