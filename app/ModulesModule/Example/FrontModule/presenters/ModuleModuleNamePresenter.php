@@ -27,9 +27,7 @@ class ModuleExamplePresenter extends ModuleBasePresenter
         }
     }
 
-    public function render(){
-        $this->moduleTemplate->articles = $this->articles;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->articles = $this->articles;
     }
 }

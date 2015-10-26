@@ -28,9 +28,7 @@ class ModuleSimpleGoogleMapsPresenter extends ModuleBasePresenter
         }
     }
 
-    public function render(){
-        $this->moduleTemplate->address = $this->address;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->address = $this->address;
     }
 }

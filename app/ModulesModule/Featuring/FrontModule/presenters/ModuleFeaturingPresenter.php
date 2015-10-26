@@ -23,10 +23,8 @@ class ModuleFeaturingPresenter extends ModuleBasePresenter
         }
     }
 
-    public function render(){
-        $this->moduleTemplate->moduleId = $this->iModuleId;
-        $this->moduleTemplate->features = $this->features;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->moduleId = $this->iModuleId;
+        $this->moduleContentTemplate->features = $this->features;
     }
 }

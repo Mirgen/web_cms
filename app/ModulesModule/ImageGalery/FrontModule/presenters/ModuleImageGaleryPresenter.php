@@ -28,10 +28,8 @@ class ModuleImageGaleryPresenter extends ModuleBasePresenter
         }
     }
 
-    public function render(){
-        $this->moduleTemplate->pageId = $this->oParentPresenter->getParameter('id');
-        $this->moduleTemplate->images = $this->images;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->pageId = $this->oParentPresenter->getParameter('id');
+        $this->moduleContentTemplate->images = $this->images;
     }
 }

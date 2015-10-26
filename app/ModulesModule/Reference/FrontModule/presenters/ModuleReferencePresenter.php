@@ -25,10 +25,8 @@ class ModuleReferencePresenter extends ModuleBasePresenter
         }
     }
 
-    public function render(){
-        $this->moduleTemplate->moduleId = $this->iModuleId;
-        $this->moduleTemplate->references = $this->references;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->moduleId = $this->iModuleId;
+        $this->moduleContentTemplate->references = $this->references;
     }
 }

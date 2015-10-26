@@ -41,10 +41,8 @@ class ModuleGuestBookPresenter extends ModuleBasePresenter
         $this->redirect('Default:page#guestBook' . $id, array('id' => $_GET['parent_page_id']));
     }
 
-    public function render(){
-        $this->moduleTemplate->addPostLink = $this->oParentPresenter->link('ModuleGuestBook:Add', array('id' => $this->iModuleId, 'parent_page_id' => $this->oParentPresenter->getParameter('id')));
-        $this->moduleTemplate->guestBookPosts = $this->guestBookPosts;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->addPostLink = $this->oParentPresenter->link('ModuleGuestBook:Add', array('id' => $this->iModuleId, 'parent_page_id' => $this->oParentPresenter->getParameter('id')));
+        $this->moduleContentTemplate->guestBookPosts = $this->guestBookPosts;
     }
 }

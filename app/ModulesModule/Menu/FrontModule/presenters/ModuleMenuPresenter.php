@@ -23,9 +23,7 @@ class ModuleMenuPresenter extends ModuleBasePresenter
         }
     }
 
-    public function render(){
-        $this->moduleTemplate->menu = $this->menu;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->menu = $this->menu;
     }
 }

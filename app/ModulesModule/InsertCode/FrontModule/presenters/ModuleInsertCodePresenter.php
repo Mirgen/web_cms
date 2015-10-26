@@ -30,9 +30,7 @@ class ModuleInsertCodePresenter extends ModuleBasePresenter
         }
     }
 
-    public function render(){
-        $this->moduleTemplate->code = $this->code;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->code = $this->code;
     }
 }

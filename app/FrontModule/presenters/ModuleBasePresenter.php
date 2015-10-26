@@ -21,6 +21,8 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
     protected $moduleTemplate;
 
+    protected $moduleContentTemplate;
+
     protected $moduleTemplateDir = NULL;
 
     protected $templateFile = "default.latte";
@@ -38,13 +40,18 @@ abstract class ModuleBasePresenter extends  BasePresenter
                 $this->moduleTemplateDir = $matches[1];
             }
 
+            /* create layout template for every module */
             $this->moduleTemplate = $this->oParentPresenter->createTemplate();
-            $this->moduleTemplate->setFile($this->templateDirectory . $this->moduleTemplateDir . "/" . $this->templateFile);
+            $this->moduleTemplate->setFile(__DIR__ . "/../templates/Modules/layout.latte");
+            $this->moduleTemplate->module = $this->module;
+
+            $this->moduleContentTemplate = $this->oParentPresenter->createTemplate();
+            $this->moduleContentTemplate->setFile($this->templateDirectory . $this->moduleTemplateDir . "/" . $this->templateFile);
 
             /* Useful variables */
-            $this->moduleTemplate->basePath = preg_replace('#https?://[^/]+#A', '', $this->oParentPresenter->template->baseUrl);
-            $this->moduleTemplate->moduleId = $this->iModuleId;
-            $this->moduleTemplate->module = $this->module;
+            $this->moduleContentTemplate->basePath = preg_replace('#https?://[^/]+#A', '', $this->oParentPresenter->template->baseUrl);
+            $this->moduleContentTemplate->moduleId = $this->iModuleId;
+            $this->moduleContentTemplate->module = $this->module;
         }
     }
 
@@ -57,11 +64,15 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
     public function load($iModuleId, $oParentPresenter = NULL){
         $this->oParentPresenter = $oParentPresenter;
-        if($this->oParentPresenter != NULL){
+        if($this->oParentPresenter != NULL)
+        {
             $this->iModuleId = $iModuleId;
             $this->loadModuleFromDB();
             $this->loadTemplate();
-            return $this->render();
+            $this->setTemplateVariables();
+
+            $this->moduleTemplate->content = $this->moduleContentTemplate;
+            return (string) $this->moduleTemplate;
         }
     }
 

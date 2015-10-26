@@ -23,9 +23,7 @@ class ModuleCarouselBootstrap3Presenter extends ModuleBasePresenter
         }
     }
 
-    public function render(){
-        $this->moduleTemplate->items = $this->items;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->items = $this->items;
     }
 }

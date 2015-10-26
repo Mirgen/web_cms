@@ -240,11 +240,11 @@ div.block {
     padding: 0 10px 0 10px;
     font-weight: bold
 }
-.module {
+.module-inner {
     margin-top: 150px;
     padding-bottom: 150px;
     border-bottom: 1px solid #eee;
 }
-.module h2{
+.module-inner h2{
     font-size: 50px
 }

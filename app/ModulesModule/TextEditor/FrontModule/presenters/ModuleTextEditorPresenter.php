@@ -27,9 +27,7 @@ class ModuleTextEditorPresenter extends ModuleBasePresenter
         }
     }
 
-    public function render(){
-        $this->moduleTemplate->text = $this->text;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->text = $this->text;
     }
 }

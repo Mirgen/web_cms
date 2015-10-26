@@ -23,9 +23,7 @@ class ModulePictogramsPresenter extends ModuleBasePresenter
         }
     }
 
-    public function render(){
-        $this->moduleTemplate->pictograms = $this->pictograms;
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->pictograms = $this->pictograms;
     }
 }

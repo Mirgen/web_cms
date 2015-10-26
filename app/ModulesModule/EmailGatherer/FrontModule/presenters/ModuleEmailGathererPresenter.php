@@ -50,9 +50,7 @@ class ModuleEmailGathererPresenter extends ModuleBasePresenter
         return $form;
     }
 
-    public function render(){
-        $this->moduleTemplate->newsletterForm = $this->createComponentNewsletterForm();
-
-        return (string) $this->moduleTemplate;
+    public function setTemplateVariables(){
+        $this->moduleContentTemplate->newsletterForm = $this->createComponentNewsletterForm();
     }
 }
