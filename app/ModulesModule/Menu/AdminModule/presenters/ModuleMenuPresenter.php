@@ -175,6 +175,9 @@ class ModuleMenuPresenter extends ModuleBasePresenter
     }
 
     public function renderDeleteItem($id){
+        // delete all its submenus
+        $this->context->moduleMenuModel->deleteBy(array("parent_id" => $id));
+        // delete the menu item itself
         $this->context->moduleMenuModel->delete($id);
 
         $this->flashMessage('Položka menu byla smazána.');

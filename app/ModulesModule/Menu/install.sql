@@ -30,4 +30,4 @@ ALTER TABLE `module_menu`
   ADD CONSTRAINT `module_menu_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `module_menu_ibfk_2` FOREIGN KEY (`module_id`) REFERENCES `page_modules_presence` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `module_menu_ibfk_3` FOREIGN KEY (`page_page_modules_id`) REFERENCES `page_modules_instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `module_menu_ibfk_4` FOREIGN KEY (`parent_id`) REFERENCES `module_menu` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
+  ADD CONSTRAINT `module_menu_ibfk_4` FOREIGN KEY (`parent_id`) REFERENCES `module_menu` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
