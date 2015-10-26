@@ -123,7 +123,7 @@ abstract class ModuleBasePresenter extends  BasePresenter
      * This function is used for example to add some new rows to database, to add 
      * default values, create some files, etc...
      */
-    protected function initialize(){
+    public function initialize(){
         return true;
     }
 
