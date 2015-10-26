@@ -22,8 +22,6 @@ class ModuleImageGaleryPresenter extends ModuleBasePresenter
 {
     private $images = NULL;
 
-    protected $moduleTemplateDir = "ImageGalery";
-
     protected function loadModuleData(){
         if($this->oParentPresenter){
             $this->images = $this->oParentPresenter->context->moduleImageGaleryModel->findBy( array('page_page_modules_id' => $this->iModuleId, 'enabled' => 1) )->order('order');

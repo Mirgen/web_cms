@@ -17,7 +17,6 @@ use \Nette\Application\UI\Form;
 
 class ModuleEmailGathererPresenter extends ModuleBasePresenter
 {
-    protected $moduleTemplateDir = "EmailGatherer";
 
     public function renderSave($id){
         $form_values = $this->request->getPost();

@@ -21,8 +21,6 @@ class ModuleGuestBookPresenter extends ModuleBasePresenter
 {
     private $guestBookPosts = NULL;
 
-    protected $moduleTemplateDir = "GuestBook";
-
     protected function loadModuleData(){
         if($this->oParentPresenter){
             $this->guestBookPosts = $this->oParentPresenter->context->moduleGuestBookModel->findBy( array('page_page_modules_id' => $this->iModuleId) )->order('id DESC');

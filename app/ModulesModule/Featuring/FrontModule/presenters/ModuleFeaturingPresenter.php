@@ -17,8 +17,6 @@ class ModuleFeaturingPresenter extends ModuleBasePresenter
 {
     private $features = NULL;
 
-    protected $moduleTemplateDir = "Featuring";
-
     protected function loadModuleData(){
         if($this->oParentPresenter){
             $this->features = $this->oParentPresenter->context->moduleFeaturingModel->findBy( array('page_page_modules_id' => $this->iModuleId, 'enabled' => 1) )->order('id DESC');

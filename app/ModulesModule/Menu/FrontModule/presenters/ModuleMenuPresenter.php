@@ -17,8 +17,6 @@ class ModuleMenuPresenter extends ModuleBasePresenter
 {
     private $menu = "";
 
-    protected $moduleTemplateDir = "Menu";
-
     protected function loadModuleData(){
         if($this->oParentPresenter){
             $this->menu = $this->oParentPresenter->context->moduleMenuModel->getMenu($this->module->id, NULL, 1);

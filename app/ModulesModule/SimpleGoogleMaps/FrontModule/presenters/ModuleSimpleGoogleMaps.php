@@ -21,8 +21,6 @@ class ModuleSimpleGoogleMapsPresenter extends ModuleBasePresenter
 {
     private $address = "";
 
-    protected $moduleTemplateDir = "SimpleGoogleMaps";
-
     protected function loadModuleData(){
         $moduleData = $this->oParentPresenter->context->moduleSimpleGoogleMapsModel->find(array('page_page_modules_id' => $this->module->id));
         if($moduleData){

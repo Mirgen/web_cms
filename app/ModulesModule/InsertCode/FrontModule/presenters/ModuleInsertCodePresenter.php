@@ -21,8 +21,6 @@ class ModuleInsertCodePresenter extends ModuleBasePresenter
 {
     private $code = "";
 
-    protected $moduleTemplateDir = "InsertCode";
-
     protected function loadModuleData(){
         if($this->oParentPresenter){
             $moduleData = $this->oParentPresenter->context->moduleInsertCodeModel->findOneBy(array('page_page_modules_id' => $this->iModuleId));

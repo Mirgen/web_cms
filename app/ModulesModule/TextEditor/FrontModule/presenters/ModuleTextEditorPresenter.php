@@ -21,8 +21,6 @@ class ModuleTextEditorPresenter extends ModuleBasePresenter
 {
     private $text = "";
 
-    protected $moduleTemplateDir = "TextEditor";
-
     protected function loadModuleData(){
         if($this->oParentPresenter){
             $this->text = $this->oParentPresenter->context->moduleTextEditorModel->findOneBy( array('page_page_modules_id' => $this->iModuleId) )->text;

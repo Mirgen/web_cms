@@ -17,8 +17,6 @@ class ModuleExamplePresenter extends ModuleBasePresenter
 {
     private $articles = "";
 
-    protected $moduleTemplateDir = "Example";
-
     protected function loadModuleData(){
         if($this->oParentPresenter){
             $this->articles = array(

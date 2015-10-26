@@ -27,7 +27,6 @@ class ModuleContactFormPresenter extends BasePresenter
 
     private $oModuleDB = NULL;
 
-
     public function load($iModuleId, $oParentPresenter = NULL){
         $this->oParentPresenter = $oParentPresenter;
         $this->iModuleId = $iModuleId;
