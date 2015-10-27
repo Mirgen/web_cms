@@ -103,7 +103,7 @@ class ModuleMenuPresenter extends ModuleBasePresenter
 
     public function renderEdit($id){
         $item = $this->context->moduleMenuModel->findOneBy( array('id' => $id) );
-        $this->load($item->page_page_modules_id);
+
         if($_POST){
             $post = $this->request->getPost();
 
@@ -125,7 +125,7 @@ class ModuleMenuPresenter extends ModuleBasePresenter
         $this->setFormItems($form);
         $form->addSubmit('cancel', 'Zrušit')->setValidationScope(FALSE);
         if(!$_POST){
-            $url_save = $this->link("Module" . $this->moduleName . ':Edit', array('id' => $this->getParameter('id'), 'parent_page_id' => $this->module->page_id));
+            $url_save = $this->link("Module" . $this->moduleName . ':Edit', array('moduleid' => $this->module->id, 'id' => $this->getParameter('id'), 'parent_page_id' => $this->module->page_id));
             $form->setAction($url_save);
         }
 
@@ -136,7 +136,6 @@ class ModuleMenuPresenter extends ModuleBasePresenter
     public function editFormSucceeded(\CustomForm $form, $values)
     {
         $item = $this->context->moduleMenuModel->find($this->params['id']);
-        $this->load($item->page_page_modules_id);
         $post = $this->request->getPost();
 
         if(isset($post["create"])){
