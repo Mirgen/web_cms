@@ -39,10 +39,9 @@ class ModuleMenu extends Base {
     }
 
     public function getModules(){
-        $query =  " SELECT modules.*, p.name as page_name, p.final_url_text as page_url_text, pm.name as module_name"
-                . " FROM page_modules_presence modules "
+        $query =  " SELECT pmp.*, p.name as page_name, p.final_url_text as page_url_text, pm.name as module_name"
+                . " FROM page_modules_presence pmp "
                 . " LEFT JOIN page p ON (p.id = modules.page_id) "
-                . " LEFT JOIN page_modules_presence pmp ON (modules.id = pmp.id) "
                 . " LEFT JOIN page_modules_instance pmi ON (pmp.page_module_instance_id = pmi.id) "
                 . " LEFT JOIN page_modules pm ON (pmi.module_id = pm.id) "
                 . " WHERE p.online = 1 "
