@@ -7,7 +7,7 @@
  */
 namespace App\Model;
 
-class Pictograms extends Base {
+class ModuleSimpleGoogleMaps extends Base {
     /** @var string */
-    protected $tableName = 'module_pictograms';
+    protected $tableName = 'module_simple_google_maps';
 }

@@ -7,7 +7,8 @@
  */
 namespace App\Model;
 
-class SimpleGoogleMaps extends Base {
+
+class ModuleCarouselBootstrap3 extends Base {
     /** @var string */
-    protected $tableName = 'module_simple_google_maps';
+    protected $tableName = 'module_carousel_bootstrap_3';
 }

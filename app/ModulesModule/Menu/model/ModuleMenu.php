@@ -8,7 +8,7 @@
 namespace App\Model;
 
 
-class Menu extends Base {
+class ModuleMenu extends Base {
     /** @var string */
     protected $tableName = 'module_menu';
 
@@ -17,10 +17,6 @@ class Menu extends Base {
         $query =  " SELECT mm.*, p.final_url_text, p.name as page_text "
                 . " FROM module_menu mm "
                 . " LEFT JOIN page p ON (p.id = mm.page_id) "
-                
-//                . " LEFT JOIN page_modules_presence pmp ON (pmp.id = mm.module_id) "
-//                . " LEFT JOIN page p ON (p.id = mpm.page_id) "
-                
                 . " WHERE page_page_modules_id = $page_page_modules_id ";
                 if(NULL === $parent_id){
                     $query .= " AND parent_id is NULL ";

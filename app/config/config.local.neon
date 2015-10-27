@@ -18,8 +18,8 @@ services:
         moduleReferenceModel: App\Model\ModuleReference
         moduleEmailGathererModel: App\Model\ModuleEmailGatherer
         moduleFeaturingModel: App\Model\ModuleFeaturing
-        moduleSimpleGoogleMapsModel: App\Model\SimpleGoogleMaps
-        modulePictogramsModel: App\Model\Pictograms
-        moduleInsertCodeModel: App\Model\InsertCode
-        moduleCarouselBootstrap3Model: App\Model\CarouselBootstrap3
-        moduleMenuModel: App\Model\Menu
+        moduleSimpleGoogleMapsModel: App\Model\ModuleSimpleGoogleMaps
+        modulePictogramsModel: App\Model\ModulePictograms
+        moduleInsertCodeModel: App\Model\ModuleInsertCode
+        moduleCarouselBootstrap3Model: App\Model\ModuleCarouselBootstrap3
+        moduleMenuModel: App\Model\ModuleMenu

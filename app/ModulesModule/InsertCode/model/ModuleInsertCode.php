@@ -8,7 +8,7 @@
 namespace App\Model;
 
 
-class CarouselBootstrap3 extends Base {
+class ModuleInsertCode extends Base {
     /** @var string */
-    protected $tableName = 'module_carousel_bootstrap_3';
+    protected $tableName = 'module_insert_code';
 }

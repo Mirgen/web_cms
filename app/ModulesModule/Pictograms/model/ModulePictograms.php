@@ -7,8 +7,7 @@
  */
 namespace App\Model;
 
-
-class InsertCode extends Base {
+class ModulePictograms extends Base {
     /** @var string */
-    protected $tableName = 'module_insert_code';
+    protected $tableName = 'module_pictograms';
 }
