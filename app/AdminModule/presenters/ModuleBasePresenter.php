@@ -72,7 +72,9 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
     protected function startup() {
         parent::startup();
-        if($this->getParameter('id')){
+        if(NULL !== $this->getParameter('moduleid')){
+            $this->loadModule($this->getParameter('moduleid'));
+        } else if(NULL !== $this->getParameter('id')) {
             $this->loadModule($this->getParameter('id'));
         }
     }
@@ -95,6 +97,7 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
     public function loadModule($moduleId, $oParentPresenter = NULL){
         $this->oParentPresenter = $oParentPresenter;
+        $matches = array();
         preg_match('/Module([a-zA-Z0-9]+)Presenter$/', get_class($this), $matches);
         $this->moduleName = $matches[1];
         $this->loadModuleFromDB($moduleId);
