@@ -54,7 +54,7 @@ class ModuleMenuPresenter extends ModuleBasePresenter
         $menuItems[0] = "--- Vyberte nadřazenou stránku ---";
         if(isset($this->menu)){
             foreach($this->menu as $item){
-                $menuItems[$item->id] = $item->link_text . $item->page_text;
+                $menuItems[$item->id] = (NULL !== $item->link_text) ? $item->link_text : $item->page_text;
             }
         }
         $form->addSelect('page_id', 'Stránka', $this->pages);

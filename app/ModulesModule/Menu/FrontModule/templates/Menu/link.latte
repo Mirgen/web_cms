@@ -1,0 +1,15 @@
+<a 
+    {if true === $submenu}
+        class="dropdown-toggle" data-toggle="dropdown" 
+    {/if}
+    {ifset $menuitem->module_id}
+        href="{link Default:page, 'id' => $menuitem->page_id, 'seo_url_text' => $menuitem->final_url_text}?{UrlExtended::friendly_url($menuitem->link_text)}=#mod-{$menuitem->module_id}">{$menuitem->link_text}
+    {elseifset $menuitem->link}
+        href="{$menuitem->link}">{$menuitem->link_text}
+    {elseifset $menuitem->page_id}
+        href="{link Default:page, 'id' => $menuitem->page_id, 'seo_url_text' => $menuitem->final_url_text}">{$menuitem->page_text}
+    {/ifset}
+    {if true === $submenu}
+        <span class="caret"></span>
+    {/if}
+</a>
