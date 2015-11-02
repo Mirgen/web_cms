@@ -24,11 +24,11 @@ class ModuleMenuPresenter extends ModuleBasePresenter
         if($this->oParentPresenter){
             $this->menu = $this->oParentPresenter->context->moduleMenuModel->getMenu($this->module->id);
             $this->pages = $this->oParentPresenter->context->page->findAll()->order('order DESC')->fetchPairs("id", "name");
-            $modules = $this->oParentPresenter->context->moduleMenuModel->getModules();
+            $modules = $this->oParentPresenter->context->pageModules->getAllModules();
         } else {
             $this->menu = $this->context->moduleMenuModel->getMenu($this->module->id);
             $this->pages = $this->context->page->findBy(array('online' => 1) )->order('order DESC')->fetchPairs("id", "name");
-            $modules = $this->context->moduleMenuModel->getModules();
+            $modules = $this->context->pageModules->getAllModules();
         }
 
         array_unshift($this->pages, "--- Vyberte stránku ---");
