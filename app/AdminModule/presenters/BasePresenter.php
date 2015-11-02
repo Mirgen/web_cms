@@ -10,7 +10,7 @@ use Nette;
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
     /** @var array */
-    private $settings;
+    protected $settings;
 
     protected function startup() {
         parent::startup();

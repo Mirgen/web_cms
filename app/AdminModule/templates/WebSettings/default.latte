@@ -1,0 +1,29 @@
+{block content}
+<div class="container">
+    <h1 n:block=title>Nastavení webové stránky</h1>
+    {ifset $settings['logo']}
+        <div class="form-group">
+            <div class="col-sm-3 control-label"></div>
+            <div class="col-sm-9">
+                <img class="logo thumbnail" src="{$basePath}/images/{$settings['logo']}" style="max-width: 300px" /><br />
+                <a n:href="WebSettings:Deletelogo" class="confirmation btn" alt="Smazat logo" title="Smazat logo">
+                    Smazat logo
+                </a>
+            </div>
+        </div>
+    {/ifset}
+    {control settings}
+</div>
+{/block}
+
+{block scripts}
+{include parent}
+<script>
+
+</script>
+{/block}
+
+
+{block head}
+
+{/block}
