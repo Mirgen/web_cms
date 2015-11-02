@@ -3,7 +3,7 @@ body {
     line-height: 1.6;
     color: #333;
     background: white;
-    padding-top: 150px;
+    padding-top: 0;
 }
 #ajax-spinner {
     margin: 15px 0 0 15px;

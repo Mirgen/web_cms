@@ -38,4 +38,23 @@ class Page extends Base {
         $nice_url_text = isset($page->seo_url_text) && !empty($page->seo_url_text) ? $page->seo_url_text : $page->name;
         return \UrlExtended::friendly_url( $id . "-" . $nice_url_text );
     }
+
+    public function getFinalUrlText($pageId){
+        $text = "";
+
+        if(NULL != $pageId){
+            $page = $this->find($pageId);
+            if (isset($page->seo_url_text) && !empty($page->seo_url_text)) {
+                $text .= \UrlExtended::friendly_url($page->seo_url_text);
+            } else {
+                $text .= \UrlExtended::friendly_url($page->name);
+            }
+        }
+
+        if(NULL != $page->id_parent){
+            return $this->getFinalUrlText($page->id_parent) . "/" . $text;
+        }
+
+        return $text;
+    }
 }

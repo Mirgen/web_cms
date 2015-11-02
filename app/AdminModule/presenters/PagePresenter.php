@@ -182,7 +182,7 @@ class PagePresenter extends BasePresenter
             // calculate and save Nice URL text to a newly added page
             unset($data);
             $data['id'] = $newPage->id;
-            $data['final_url_text'] = $this->getFinalUrlText($newPage->id);
+            $data['final_url_text'] = $this->context->page->getFinalUrlText($newPage->id);
             $this->context->page->update($data);
 
             $this->flashMessage('Stránka byla úspěšně přidána.');
@@ -233,25 +233,6 @@ class PagePresenter extends BasePresenter
         return $form;
     }
 
-    private function getFinalUrlText($pageId){
-        $text = "";
-
-        if(NULL != $pageId){
-            $page = $this->context->page->find($pageId);
-            if (isset($page->seo_url_text) && !empty($page->seo_url_text)) {
-                $text .= \UrlExtended::friendly_url($page->seo_url_text);
-            } else {
-                $text .= \UrlExtended::friendly_url($page->name);
-            }
-        }
-
-        if(NULL != $page->id_parent){
-            return $this->getFinalUrlText($page->id_parent) . "/" . $text;
-        }
-
-        return $text;
-    }
-
     // volá se po úspěšném odeslání formuláře
     public function editPageFormSucceeded(UI\Form $form, $values)
     {
@@ -267,7 +248,7 @@ class PagePresenter extends BasePresenter
 
         $data = array();
         $data['id'] = $this->getParameter('id');
-        $data['final_url_text'] = $this->getFinalUrlText($data['id']);
+        $data['final_url_text'] = $this->context->page->getFinalUrlText($data['id']);
         $this->context->page->update($data);
 
         $this->flashMessage('Stránka byla úspěšně upravena.');

@@ -1,0 +1,47 @@
+<style>
+{if 0 != $module->settings->logo}
+    .automatic-header a.logo img{
+        max-height: 90px;
+        margin: 0 auto;
+    }
+{/if}
+{if 0 != $module->settings->sticky}
+    body {
+        padding-top: 150px;
+    }
+{/if}
+</style>
+
+<div class="container automatic-header">
+    <div class="navbar navbar-inverse {if 0 != $module->settings->sticky}navbar-fixed-top{/if} {if 0 != $module->settings->fade_effect}fade-in one{/if}" role="navigation" style="height: 130px; padding: 20px 0 20px 0; background: white; border: 0">
+        <div class="container">
+            {if '' !== $module->settings->logo_text}
+                <div class="navbar-header" style="width: 30%; float: left; text-align: center">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                    <a href="{link Default:page}" class="automatic-header logo">
+                        {if (0 != $module->settings->logo) &&  isset($settings['logo'])}
+                            <img src="{$basePath}/images/{$settings['logo']}" alt="{$module->settings->logo_text}" title="{$module->settings->logo_text}" />
+                        {else}
+                            <h1>{$module->settings->logo_text}</h1>
+                        {/if}
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse" style="width: 70%; float: right; margin-top: 15px;">
+            {/if}
+
+            {if 0 != $module->settings->menu_visible}
+                <ul class="nav navbar-nav">
+                    {include 'menu.latte', menu => $menu}
+                </ul>
+            {/if}
+            {if '' !== $module->settings->logo_text}
+                </div>
+            {/if}
+        </div>
+    </div>
+</div>

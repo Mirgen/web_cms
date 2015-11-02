@@ -1,0 +1,18 @@
+{foreach $menu as $menuitem}
+    <li {if false === empty($menuitem->sub_menu)} class="dropdown"{/if}>
+        {if false === empty($menuitem->sub_menu)}
+            {include 'link.latte', menuitem => $menuitem, submenu => true}
+        {else}
+            {include 'link.latte', menuitem => $menuitem, submenu => false}
+        {/if}
+        {if false === empty($menuitem->sub_menu)}
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    {include 'link.latte', menuitem => $menuitem, submenu => false}
+                </li>
+                <li role="separator" class="divider"></li>
+                {include 'menu.latte', menu => $menuitem->sub_menu, submenu => true}
+            </ul>
+        {/if}
+    </li>
+{/foreach}

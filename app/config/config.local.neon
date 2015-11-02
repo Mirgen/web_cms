@@ -23,3 +23,4 @@ services:
         moduleInsertCodeModel: App\Model\ModuleInsertCode
         moduleCarouselBootstrap3Model: App\Model\ModuleCarouselBootstrap3
         moduleMenuModel: App\Model\ModuleMenu
+        moduleAutomaticHeaderModel: App\Model\ModuleAutomaticHeader
