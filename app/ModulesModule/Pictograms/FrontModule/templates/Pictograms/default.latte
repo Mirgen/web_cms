@@ -12,7 +12,7 @@
         {foreach $pictograms as $pictogram}
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 center pictogram">
                 {if $pictogram->link}
-                    <a href="{$feature->link}" class="block">
+                    <a href="{$pictogram->link}" class="block">
                 {/if}
                     <h3><span class="{$pictogram->icon}" aria-hidden="true"></span></h3>
                     <p>{$pictogram->text|noescape}</p>
