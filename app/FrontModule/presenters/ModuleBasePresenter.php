@@ -44,7 +44,6 @@ abstract class ModuleBasePresenter extends  BasePresenter
             $this->moduleTemplate = $this->oParentPresenter->createTemplate();
             $this->moduleTemplate->setFile(__DIR__ . "/../templates/Modules/layout.latte");
             $this->moduleTemplate->module = $this->module;
-            $this->moduleTemplate->settings = $this->oParentPresenter->context->settings->getAll();
 
             $this->moduleContentTemplate = $this->oParentPresenter->createTemplate();
             $this->moduleContentTemplate->setFile($this->templateDirectory . $this->moduleTemplateDir . "/" . $this->templateFile);
@@ -53,6 +52,7 @@ abstract class ModuleBasePresenter extends  BasePresenter
             $this->moduleContentTemplate->basePath = preg_replace('#https?://[^/]+#A', '', $this->oParentPresenter->template->baseUrl);
             $this->moduleContentTemplate->moduleId = $this->iModuleId;
             $this->moduleContentTemplate->module = $this->module;
+            $this->moduleContentTemplate->settings = $this->oParentPresenter->context->settings->getAll();
         }
     }
 
