@@ -26,6 +26,11 @@ class ImageUploader
     // default: www/images/
     private $imagesFolder = "images/";
 
+    /*
+     * string save new file under this name
+     */
+    private $newFileName = NULL;
+
     // constructed in constructor
     private $baseDir = "";
 
@@ -44,7 +49,7 @@ class ImageUploader
 
     private $result = array();
 
-    public function __construct($requestFiles, $destinationFolder, $resize = true, $createThumbnails = false, $formInputName = NULL)
+    public function __construct($requestFiles, $destinationFolder = "", $resize = true, $createThumbnails = false, $formInputName = NULL)
     {
         $this->requestFiles = $requestFiles;
         $this->destinationFolder = $destinationFolder;
@@ -59,6 +64,10 @@ class ImageUploader
         if($formInputName !== NULL){
             $this->formInputName = $formInputName;
         }
+    }
+
+    public function setNewFileName($newFileName){
+        $this->newFileName = $newFileName;
     }
 
     public function setMaxWidth($width){
@@ -125,8 +134,10 @@ class ImageUploader
         foreach ($files as $file) {
             if($file->isImage() && $file->isOk()) {
                 $fileExtension = strtolower(mb_substr($file->getSanitizedName(), strrpos($file->getSanitizedName(), ".")));
-                $newFileName = uniqid(rand(0,20), TRUE);
-                $wholePath = $this->baseDir . $newFileName . $fileExtension;
+                if(NULL === $this->newFileName){
+                    $this->newFileName = uniqid(rand(0,20), TRUE);
+                }
+                $wholePath = $this->baseDir . $this->newFileName . $fileExtension;
                 $file->move($wholePath);
 
                 // resize main image:
@@ -153,10 +164,10 @@ class ImageUploader
                         $image_thumb->crop(0, $top, $this->thumbnailMaxWidth, $this->thumbnailMaxHeight);
                     }
                     $image_thumb->sharpen();
-                    $image_thumb->save($baseDir . $newFileName . "_t" . $fileExtension);
+                    $image_thumb->save($baseDir . $this->newFileName . "_t" . $fileExtension);
                 }
 
-                $this->result[] = array("name" => $newFileName, "extension" => $fileExtension, "original" => $file->name);
+                $this->result[] = array("name" => $this->newFileName, "extension" => $fileExtension, "original" => $file->name);
             } else {
                 $this->result[] = array("error" => $file->error, "original" => $file->name);
             }
