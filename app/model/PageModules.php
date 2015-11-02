@@ -30,6 +30,15 @@ class PageModules extends Base {
         return $this->query($query);
     }
 
+    public function getAllModulesForSelect($online = "1 OR 0"){
+        $modules = $this->getAllModules($online);
+
+        foreach($modules as $module){
+            $modulesArray[$module->id] = $module->module_name . " na stránce " . $module->page_name;
+        }
+        return $modulesArray;
+    }
+
     public function getAllActivePageModules() {
         $aParameters = array('enabled' => 1);
         $oPageModules = $this->findBy($aParameters);

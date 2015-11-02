@@ -118,23 +118,6 @@ class PagePresenter extends BasePresenter
         return $form;
     }
 
-    protected function registerModule($page_id, $page_module_id){
-        $data['page_id'] = $page_id;
-        $data['position'] = $this->context->pageModuleRegister->findBy(array('page_id' => $page_id))->count()+1;
-
-        /* First save the module itself - kind of instance of a module */
-        $insertedModule =  $this->context->pageModuleInstance->insert( array("module_id" => $page_module_id));
-
-        $data["page_module_instance_id"] = $insertedModule->id;
-        $data["enabled"] = 1;
-        /* Save module data related to the concrete page, One (the same) module can be on many pages */
-        $this->context->pageModuleRegister->insert($data);
-
-        $module = $this->context->pageModules->loadClass($page_module_id);
-        $module->loadModule($insertedModule->id, $this);
-        $module->initialize();
-    }
-
     public function addPageModuleToPageFormSucceeded(UI\Form $form, $values)
     {
         if($values['page_module_id'] == NULL) {
@@ -147,6 +130,59 @@ class PagePresenter extends BasePresenter
             $this->flashMessage('Modul byl úspěšně přidán.');
             $this->redirect('Page:edit', array('id' => $this->getParameter('id')));
         }
+    }
+
+
+    protected function createComponentAddExistingModuleForm()
+    {
+        $aPageModules = $this->context->pageModules->getAllModulesForSelect();
+
+        $form = new \CustomForm();
+        $form->addSelect('module_id', 'Modul:', $aPageModules)->setPrompt('Zvolte modul');
+        $form->addSubmit('addPage', 'Přidat modul');
+        $form->onSuccess[] = array($this, 'addExistingModuleFormSucceeded');
+        $form->setCustomRenderer();
+        return $form;
+    }
+
+    public function addExistingModuleFormSucceeded(UI\Form $form, $values)
+    {
+        if($values['module_id'] == NULL) {
+            $this->flashMessage('Musíte vybrat modul, který bude přidán do stránky.', 'danger');
+        } else {
+            $this->setModuleToPage($this->getParameter('id'), $values['module_id']);
+            $this->flashMessage('Modul byl úspěšně přidán.');
+        }
+        $this->redirect('Page:edit', array('id' => $this->getParameter('id')));
+    }
+
+    protected function registerModule($page_id, $page_module_id){
+
+        /* First save the module itself - kind of instance of a module */
+        $insertedModuleId = $this->createmoduleInstance($page_module_id);
+        $this->setModuleToPage($page_id, $insertedModuleId);
+
+        // initialize module
+        $module = $this->context->pageModules->loadClass($page_module_id);
+        $module->loadModule($insertedModuleId, $this);
+        $module->initialize();
+    }
+
+    private function setModuleToPage($pageId, $moduleInstanceId){
+        $data = array();
+        $data['page_id'] = $pageId;
+        $data['position'] = $this->context->pageModuleRegister->findBy(array('page_id' => $pageId))->count()+1;
+        $data["page_module_instance_id"] = $moduleInstanceId;
+        $data["enabled"] = 1;
+
+        /* Save module data related to the concrete page, One (the same) module can be on many pages */
+        $this->context->pageModuleRegister->insert($data);
+    }
+
+    private function createmoduleInstance($page_module_id){
+        /* First save the module itself - kind of instance of a module */
+        $insertedModule =  $this->context->pageModuleInstance->insert( array("module_id" => $page_module_id));
+        return $insertedModule->id;
     }
 
     protected function createComponentAddPageForm()
