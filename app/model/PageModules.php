@@ -32,6 +32,7 @@ class PageModules extends Base {
 
     public function getAllModulesForSelect($online = "1 OR 0"){
         $modules = $this->getAllModules($online);
+        $modulesArray = array();
 
         foreach($modules as $module){
             $modulesArray[$module->id] = $module->module_name . " na stránce " . $module->page_name;
