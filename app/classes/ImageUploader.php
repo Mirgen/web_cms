@@ -97,7 +97,7 @@ class ImageUploader
         if (is_dir($this->baseDir)) {
             $files = array_diff(scandir($this->baseDir), array('.','..'));
             foreach ($files as $file) {
-              (is_dir($this->baseDir. $file)) ? delTree($this->baseDir . $file) : $this->deleteImage($this->baseDir . $file);
+              (is_dir($this->baseDir. $file)) ? deleteDirectory($this->baseDir . $file) : $this->deleteImage($file);
             }
             return rmdir($this->baseDir);
         }
