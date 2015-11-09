@@ -153,25 +153,18 @@ abstract class ModuleBasePresenter extends  BasePresenter
                                                             "page_module_instance_id" => $id
                                                         )
                                                     );
-
-        /* 2. Check if the module is also on another page (one particular module can be on One to Many pages): */
-        $moduleOccurences = $this->context->pageModuleRegister->findBy(array(
-                                                            "page_id" => $this->module->page_id,
-                                                            "page_module_instance_id" => $id
-                                                        )
-                                        );
-
-        if($moduleOccurences->count() == 0 ){
-            /* 3. If the module is NOT on other page, we will delete also "module itself". So that nothing  will left from this module! */
-            $this->context->pageModuleInstance->delete($id);
-
-            /* 4. make sure to delete all the setting related to deleted module */
-            $this->context->modulesSettings->deleteBy(array("module_id" => $id));
-        }
+        $this->deleteWholeModule($id);
         $this->recalculatePositions($this->module->page_id);
 
         $this->flashMessage('Modul byl smazán.');
         $this->redirect('Page:edit', array('id' => $this->module->page_id));
+    }
+
+    private function deleteWholeModule($instanceId){
+        /* If the module is NOT on other page, we will delete also "module itself". So that nothing  will left from this module! */
+        $this->context->pageModuleInstance->delete($instanceId);
+        /* Make sure to delete all the setting related to deleted module */
+        $this->context->modulesSettings->deleteBy(array("module_id" => $instanceId));
     }
 
     public function renderEnableDisable($id){
