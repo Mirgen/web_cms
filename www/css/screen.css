@@ -5,6 +5,10 @@ body {
     background: white;
     padding-top: 0;
 }
+h3 {
+    font-size: 2.5em;
+    margin-bottom: 50px
+}
 #ajax-spinner {
     margin: 15px 0 0 15px;
     padding: 13px;
