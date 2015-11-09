@@ -150,7 +150,7 @@ class PagePresenter extends BasePresenter
         if($values['module_id'] == NULL) {
             $this->flashMessage('Musíte vybrat modul, který bude přidán do stránky.', 'danger');
         } else {
-            $this->setModuleToPage($this->getParameter('id'), $values['module_id']);
+            $this->putModuleToPage($this->getParameter('id'), $values['module_id']);
             $this->flashMessage('Modul byl úspěšně přidán.');
         }
         $this->redirect('Page:edit', array('id' => $this->getParameter('id')));
@@ -160,7 +160,7 @@ class PagePresenter extends BasePresenter
 
         /* First save the module itself - kind of instance of a module */
         $insertedModuleId = $this->createmoduleInstance($page_module_id);
-        $this->setModuleToPage($page_id, $insertedModuleId);
+        $this->putModuleToPage($page_id, $insertedModuleId);
 
         // initialize module
         $module = $this->context->pageModules->loadClass($page_module_id);
@@ -168,7 +168,7 @@ class PagePresenter extends BasePresenter
         $module->initialize();
     }
 
-    private function setModuleToPage($pageId, $moduleInstanceId){
+    private function putModuleToPage($pageId, $moduleInstanceId){
         $data = array();
         $data['page_id'] = $pageId;
         $data['position'] = $this->context->pageModuleRegister->findBy(array('page_id' => $pageId))->count()+1;

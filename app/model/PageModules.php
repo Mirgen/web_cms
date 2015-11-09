@@ -19,7 +19,7 @@ class PageModules extends Base {
     protected $tableName = 'page_modules';
 
     public function getAllModules($online = 1){
-        $query =  " SELECT pmp.*, p.name as page_name, p.final_url_text as page_url_text, pm.name as module_name"
+        $query =  " SELECT pmp.page_id, pmp.position, pmp.enabled, pmi.id as id, p.name as page_name, pmp.id as occurence_id, p.final_url_text as page_url_text, pm.name as module_name"
                 . " FROM page_modules_presence pmp "
                 . " LEFT JOIN page p ON (p.id = pmp.page_id) "
                 . " LEFT JOIN page_modules_instance pmi ON (pmp.page_module_instance_id = pmi.id) "
