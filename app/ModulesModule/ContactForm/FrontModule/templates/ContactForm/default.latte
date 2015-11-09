@@ -1,6 +1,10 @@
 <div class="container">
     <div class="module-inner">
-        <h3>Napište mi</h3>
+        {ifset $module->settings->title}
+            {if !empty($module->settings->title)}
+                <h3>{$module->settings->title}</h3>
+            {/if}
+        {/ifset}
         <form class="form-horizontal" method="post" action="{$url}">
             <div class="form-group form-group-lg">
               <label class="col-sm-2 control-label">Vaše jméno</label>

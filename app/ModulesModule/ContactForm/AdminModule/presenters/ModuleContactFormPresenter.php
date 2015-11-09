@@ -22,6 +22,7 @@ class ModuleContactFormPresenter extends ModuleBasePresenter
     private $moduleData = NULL;
 
     public function initialize(){
+        $this->addNewModuleSetting("Nadpis", "title", "Napište mi");
         $data['page_page_modules_id'] = $this->module->id;
         $this->oParentPresenter->context->moduleContactFormModel->insert($data);
     }
