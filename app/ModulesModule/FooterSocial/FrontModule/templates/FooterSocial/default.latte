@@ -1,0 +1,64 @@
+<style>
+    div.footerSocial .module-inner{
+        text-align: center
+    }
+    div.footerSocial .module-inner .social{
+        margin-bottom: 15px
+    }
+    div.footerSocial .module-inner .email{
+        margin-bottom: 25px
+    }
+</style>
+<div class="container footerSocial">
+    <div class="module-inner">
+        <hr />
+        <div class="social">
+            {ifset $module->settings->facebook}
+                {if $module->settings->facebook}
+                    <a href="{$module->settings->facebook}" target="_blank">
+                        <img src="{link ModuleFooterSocial:GetImage,'facebook'}" alt="Facebook" title="Facebook" />
+                    </a>
+                {/if}
+            {/ifset}
+            {ifset $module->settings->twitter}
+                {if $module->settings->twitter}
+                    <a href="{$module->settings->twitter}" target="_blank">
+                        <img src="{link ModuleFooterSocial:GetImage,'twitter'}" alt="Twitter" title="Twitter" />
+                    </a>
+                {/if}
+            {/ifset}
+            {ifset $module->settings->instagram}
+                {if $module->settings->instagram}
+                    <a href="{$module->settings->instagram}" target="_blank">
+                        <img src="{link ModuleFooterSocial:GetImage,'instagram'}" alt="Instagram" title="Instagram" />
+                    </a>
+                {/if}
+            {/ifset}
+        </div>
+
+        <div class="email">
+            {ifset $module->settings->email}
+                {if $module->settings->email}
+                    <a href="mailto:{$module->settings->email}">
+                        {$module->settings->email}
+                    </a>
+                {/if}
+            {/ifset}
+        </div>
+
+        <div class="copyright">
+            © Copyright 
+           {ifset $module->settings->copyrightfrom}
+               {if $module->settings->copyrightfrom}
+                    {$module->settings->copyrightfrom} - 
+               {/if}
+           {/ifset}
+           {$currentYear} 
+           {ifset $module->settings->copyrighttext}
+               {if $module->settings->copyrighttext}
+                    {$module->settings->copyrighttext}
+               {/if}
+           {/ifset}
+        </div>
+    </div>
+</div>
