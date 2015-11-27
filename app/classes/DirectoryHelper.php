@@ -21,4 +21,21 @@ class DirectoryHelper
         } 
         closedir($dir); 
     }
+
+    /**
+     * public function deleteDirectory, recursively deletes directory and all its content
+     * 
+     * @param string $dirPath
+     * @return bool
+     */
+    public static function deleteDirectory($dirPath){
+        if (is_dir($dirPath)) {
+            $files = array_diff(scandir($dirPath), array('.','..'));
+            foreach ($files as $file) {
+              (is_dir($dirPath . $file)) ? deleteDirectory($dirPath . $file) : unlink($dirPath . $file);
+            }
+            return rmdir($dirPath);
+        }
+        return true;
+    }
 }
