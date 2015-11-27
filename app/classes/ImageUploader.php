@@ -164,10 +164,11 @@ class ImageUploader
                         $image_thumb->crop(0, $top, $this->thumbnailMaxWidth, $this->thumbnailMaxHeight);
                     }
                     $image_thumb->sharpen();
-                    $image_thumb->save($baseDir . $this->newFileName . "_t" . $fileExtension);
+                    $image_thumb->save($this->baseDir . $this->newFileName . "_t" . $fileExtension);
                 }
 
                 $this->result[] = array("name" => $this->newFileName, "extension" => $fileExtension, "original" => $file->name);
+                $this->newFileName = NULL;
             } else {
                 $this->result[] = array("error" => $file->error, "original" => $file->name);
             }
