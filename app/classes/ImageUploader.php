@@ -153,16 +153,24 @@ class ImageUploader
                 // thumbnail image if needed:
                 if(true === $this->createThumbnails){
                     $image_thumb = \Nette\Image::fromFile($wholePath);
-                    // resize image to be smaller:
-                    if($image_thumb->getWidth() > $this->thumbnailMaxWidth) {
-                        $image_thumb->resize($this->thumbnailMaxWidth, NULL);
-                    }
-                    // resize to square:
-                    if($image_thumb->getHeight() > $this->thumbnailMaxHeight){
+
+                    if($image_thumb->getWidth() >= $image_thumb->getHeight()){
+                        // first resize the image to be smaller
+                        $image_thumb->resize(NULL, $this->thumbnailMaxHeight);
                         // calculate TOP coordinate to fit needed rectangle to the middle of the image
-                        $top = ($image_thumb->getHeight() - $this->thumbnailMaxHeight)/2;
+                        $left = (int)($image_thumb->getWidth() - $this->thumbnailMaxWidth)/2;
+                        // resize to rectangle given by $this->thumbnailMaxWidth and $this->thumbnailMaxHeight
+                        $image_thumb->crop($left, 0, $this->thumbnailMaxWidth, $this->thumbnailMaxHeight);
+                    }
+                    else if($image_thumb->getWidth() < $image_thumb->getHeight()){
+                        // first resize the image to be smaller
+                        $image_thumb->resize($this->thumbnailMaxWidth, NULL);
+                        // calculate TOP coordinate to fit needed rectangle to the middle of the image
+                        $top = (int)($image_thumb->getHeight() - $this->thumbnailMaxHeight)/2;
+                        // resize to rectangle given by $this->thumbnailMaxWidth and $this->thumbnailMaxHeight
                         $image_thumb->crop(0, $top, $this->thumbnailMaxWidth, $this->thumbnailMaxHeight);
                     }
+
                     $image_thumb->sharpen();
                     $image_thumb->save($this->baseDir . $this->newFileName . "_t" . $fileExtension);
                 }
