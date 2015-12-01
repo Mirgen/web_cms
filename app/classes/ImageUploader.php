@@ -129,8 +129,49 @@ class ImageUploader
         return $this->result;
     }
 
-    private function upload($files){
+    /**
+     * function to create thumbnail of desired size
+     * 
+     * @param $source Absolute path to source image. 
+     * @param $destination Absolute path to folder where new thumbnail will be stored.
+     * @param $width Width of new thumbnail image. 
+     * @param $height Height of new thumbnail image. 
+     * @return boolean TRUE on success or FALSE on failure.
+     */
+    public static function createThumbnail($source, $destination, $width, $height, $rectangle = FALSE){
+        $source = realpath($source);
+        $image_thumb = \Nette\Image::fromFile($source);
 
+        if($rectangle)
+        {
+            if($image_thumb->getWidth() >= $image_thumb->getHeight())
+            {
+                // first resize the image to be smaller
+                $image_thumb->resize(NULL, $height);
+                // calculate TOP coordinate to fit needed rectangle to the middle of the image
+                $left = (int)($image_thumb->getWidth() - $width)/2;
+                // resize to rectangle given by $width and $height
+                $image_thumb->crop($left, 0, $width, $height);
+            }
+            else if($image_thumb->getWidth() < $image_thumb->getHeight())
+            {
+                // first resize the image to be smaller
+                $image_thumb->resize($width, NULL);
+                // calculate TOP coordinate to fit needed rectangle to the middle of the image
+                $top = (int)($image_thumb->getHeight() - $height)/2;
+                // resize to rectangle given by $width and $height
+                $image_thumb->crop(0, $top, $width, $height);
+            }
+        } else {
+            $image_thumb->resize($width, $height);
+        }
+
+        $image_thumb->sharpen();
+        return $image_thumb->save($destination);
+    }
+
+    private function upload($files)
+    {
         foreach ($files as $file) {
             if($file->isImage() && $file->isOk()) {
                 $fileExtension = strtolower(mb_substr($file->getSanitizedName(), strrpos($file->getSanitizedName(), ".")));
@@ -152,27 +193,7 @@ class ImageUploader
 
                 // thumbnail image if needed:
                 if(true === $this->createThumbnails){
-                    $image_thumb = \Nette\Image::fromFile($wholePath);
-
-                    if($image_thumb->getWidth() >= $image_thumb->getHeight()){
-                        // first resize the image to be smaller
-                        $image_thumb->resize(NULL, $this->thumbnailMaxHeight);
-                        // calculate TOP coordinate to fit needed rectangle to the middle of the image
-                        $left = (int)($image_thumb->getWidth() - $this->thumbnailMaxWidth)/2;
-                        // resize to rectangle given by $this->thumbnailMaxWidth and $this->thumbnailMaxHeight
-                        $image_thumb->crop($left, 0, $this->thumbnailMaxWidth, $this->thumbnailMaxHeight);
-                    }
-                    else if($image_thumb->getWidth() < $image_thumb->getHeight()){
-                        // first resize the image to be smaller
-                        $image_thumb->resize($this->thumbnailMaxWidth, NULL);
-                        // calculate TOP coordinate to fit needed rectangle to the middle of the image
-                        $top = (int)($image_thumb->getHeight() - $this->thumbnailMaxHeight)/2;
-                        // resize to rectangle given by $this->thumbnailMaxWidth and $this->thumbnailMaxHeight
-                        $image_thumb->crop(0, $top, $this->thumbnailMaxWidth, $this->thumbnailMaxHeight);
-                    }
-
-                    $image_thumb->sharpen();
-                    $image_thumb->save($this->baseDir . $this->newFileName . "_t" . $fileExtension);
+                    $this->createThumbnail($wholePath, $this->baseDir . $this->newFileName . "_t" . $fileExtension, $this->thumbnailMaxWidth, $this->thumbnailMaxHeight, true);
                 }
 
                 $this->result[] = array("name" => $this->newFileName, "extension" => $fileExtension, "original" => $file->name);
