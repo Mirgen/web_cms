@@ -15,6 +15,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     protected function startup() {
         parent::startup();
 
+        $this->setPaths();
+
         $settings = $this->context->settings->getAll();
         $this->template->title = "Administrace";
 
@@ -29,6 +31,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         } else {
             $this->template->user = $this->getUser();
         }
+    }
+
+    private function setPaths(){
+        define("WWW_DIR", realpath(__DIR__ . "/../../../www/"));
+        define("APP_DIR", realpath(__DIR__ . "/../../"));
     }
 
     private function getLatestPages(){
