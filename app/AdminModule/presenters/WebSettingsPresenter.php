@@ -29,6 +29,7 @@ class WebSettingsPresenter extends BasePresenter
         $form->addText('title', 'Titulek stránky', 64);
         $form->addText('description', 'Popis stránky', 256);
         $form->addText('keywords', 'Klíčová slova stránky', 512);
+        $form->addText('layout', 'Layout', 6);
         $form->addSubmit('addPage', 'Uložit');
 
         $form->setDefaults($this->settings);
@@ -44,6 +45,7 @@ class WebSettingsPresenter extends BasePresenter
         $settings['title'] = $values['title'];
         $settings['keywords'] = $values['keywords'];
         $settings['description'] = $values['description'];
+        $settings['layout'] = $values['layout'];
 
         if(0 == $values['logo']->error){
             $imageUploader = new \ImageUploader($this->request->getFiles());
@@ -91,6 +93,7 @@ class WebSettingsPresenter extends BasePresenter
 
     private function updateSetting($name, $value){
         $setting = $this->context->settings->findOneBy(array("name" => $name));
+
         if($setting){
             $setting->update(array("value" => $value));
             return $setting;
