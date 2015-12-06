@@ -7,7 +7,7 @@
         {/for}
     </ol>
     <div class="carousel-inner" role="listbox">
-        <div n:foreach="$items as $item" class="item {if $iterator->counter == $module->settings->active}active{/if}" style="background-image:url('{$basePath}/images/modulecarouselbootstrap3/{$module->page_id}/{$item->image}');">
+        <div n:foreach="$items as $item" class="item {if $iterator->counter == $module->settings->active}active{/if}" style="background-image:url('{$basePath}/images/moduleCarouselBootstrap3/{$module->page_id}/{$item->image}');">
             <div class="carousel-caption">
                 <h2>{$item->title}</h2>
                 <h3>{$item->subtitle}</h3>
