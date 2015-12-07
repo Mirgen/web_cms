@@ -36,6 +36,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     private function setPaths(){
         define("WWW_DIR", realpath(__DIR__ . "/../../../www/"));
         define("APP_DIR", realpath(__DIR__ . "/../../"));
+        define("IMG_DIR", realpath(WWW_DIR . "/images/"));
     }
 
     private function getLatestPages(){
