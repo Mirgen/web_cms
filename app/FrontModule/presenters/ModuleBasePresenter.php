@@ -27,6 +27,10 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
     protected $templateFile = "default.latte";
 
+    protected $moduleName = "";
+
+    protected $db = NULL;
+
     private function loadTemplate()
     {
         if(isset($this->templateFile) && !empty($this->templateFile))
@@ -58,7 +62,12 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
     protected function startup() {
         parent::startup();
-        if($this->getParameter('id')){
+
+        if($this->getParameter('moduleid')){
+            $this->iModuleId = $this->getParameter('moduleid');
+            $this->loadModuleFromDB();
+            $this->template->module = $this->module;
+        } else if($this->getParameter('id')){
             $this->load($this->getParameter('id'));
         }
     }
@@ -81,7 +90,11 @@ abstract class ModuleBasePresenter extends  BasePresenter
         if($this->module){
             $this->module->settings = new \stdClass();
 
-            $settings = $this->oParentPresenter->context->modulesSettings->findBy(array("module_id" => $this->module->id));
+            if(isset($this->oParentPresenter)){
+                $settings = $this->oParentPresenter->context->modulesSettings->findBy(array("module_id" => $this->module->id));
+            } else {
+                $settings = $this->context->modulesSettings->findBy(array("module_id" => $this->module->id));
+            }
             foreach($settings as $setting){
                 $this->module->settings->{$setting->key} = $setting->value;
             }
@@ -91,12 +104,50 @@ abstract class ModuleBasePresenter extends  BasePresenter
     protected function loadModuleFromDB(){
         if($this->oParentPresenter){
             $this->module = $this->oParentPresenter->context->pageModuleRegister->getModule($this->iModuleId);
-            $this->loadModuleSettings();
-            $this->loadModuleData();
         } else {
             $this->module = $this->context->pageModuleRegister->getModule($this->iModuleId);
-            $this->loadModuleSettings();
         }
+
+        $this->setModuleName();
+        $this->loadModuleSettings();
+        $this->setDB();
+
+        if($this->oParentPresenter){
+            $this->loadModuleData();
+        }
+    }
+
+    /*
+     * Set DB variable. variable for DB operations.
+     * 
+     * @return void
+*      */
+    private function setDB(){
+        // set DB variable
+        $context = NULL;
+        if($this->oParentPresenter){
+            $context = $this->oParentPresenter->context;
+        } else {
+            $context = $this->context;
+        }
+
+        $DBModel = "module" . $this->moduleName . "Model";
+
+        if(isset($context->{$DBModel})){
+            $this->db = $context->{$DBModel};
+        }
+    }
+
+
+    /*
+     * This function sets the name of this module into class variable "moduleName". 
+     * 
+     * @return string moduleName
+*      */
+    private function setModuleName(){
+        $matches = array();
+        preg_match('/Module([a-zA-Z0-9]+)Presenter$/', get_class($this), $matches);
+        return $this->moduleName = $matches[1];
     }
 
     protected function loadModuleData(){
