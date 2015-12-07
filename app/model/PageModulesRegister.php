@@ -18,10 +18,19 @@ class PageModuleRegister extends Base {
     protected $tableName = 'page_modules_presence';
 
     public function getModule($id){
-        $query =  " SELECT pm.name, pm.class_name, pmi.id as id, pmp.position, pmp.enabled, pmp.page_id, pmp.id as presence_id, pm.id as class_id "
+        $query =  " SELECT  pm.name, 
+                            pm.class_name, 
+                            pmi.id as id, 
+                            pmp.position, 
+                            pmp.enabled, 
+                            pmp.page_id, 
+                            pmp.id as presence_id, 
+                            pm.id as class_id, 
+                            CONCAT(p.id, '-', p.name) as page_url "
                 . " FROM page_modules_instance pmi "
                 . " LEFT JOIN page_modules_presence pmp ON (pmi.id = pmp.page_module_instance_id) "
                 . " LEFT JOIN page_modules pm ON (pm.id = pmi.module_id) "
+                . " LEFT JOIN page p ON (p.id = pmp.page_id) "
                 . " WHERE pmi.id = $id ";
         $module = $this->query($query);
         return $module->fetch();
