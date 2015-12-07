@@ -37,6 +37,17 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $this->cache->save('pages', $this->pages);
     }
 
+    /*
+     * This method check if we have default layout set in settings variable. It
+     * is set in admin part in Website setting.
+     * 
+     * If it is not set we will create this setting with default layout. This 
+     * setting is then available in templates. See /app/FrontModule/@layout.latte 
+     * where $settings["layout"] is used. 
+     * 
+     * Basicaly in this latte file we are loading current layout file given by
+     * $settings["layout"].
+     */
     private function setLayoutVariale()
     {
         if(!isset($this->settings["layout"]) ||
