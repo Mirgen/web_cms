@@ -30,6 +30,8 @@ abstract class ModuleBasePresenter extends  BasePresenter
     
     protected $moduleName = "";
 
+    protected $db = null;
+
     public function beforeRender()
     {
         // set the same layout for all modules so they look the same like
@@ -100,11 +102,35 @@ abstract class ModuleBasePresenter extends  BasePresenter
         $matches = array();
         preg_match('/Module([a-zA-Z0-9]+)Presenter$/', get_class($this), $matches);
         $this->moduleName = $matches[1];
+
+        // set DB variable
+        $this->setDB();
         $this->loadModuleFromDB($moduleId);
     }
 
-    protected function loadModuleFromDB($moduleId){
+    /*
+     * Set DB variable. variable for DB operations.
+     * 
+     * @return void
+*      */
+    private function setDB(){
+        // set DB variable
+        $context = NULL;
         if($this->oParentPresenter){
+            $context = $this->oParentPresenter->context;
+        } else {
+            $context = $this->context;
+        }
+
+        $DBModel = "module" . $this->moduleName . "Model";
+
+        if(isset($context->{$DBModel})){
+            $this->db = $context->{$DBModel};
+        }
+    }
+
+    protected function loadModuleFromDB($moduleId){
+            if($this->oParentPresenter){
             $this->module = $this->oParentPresenter->context->pageModuleRegister->getModule($moduleId);
             $this->module->settings = $this->oParentPresenter->context->modulesSettings->findBy(array("module_id" => $this->module->id));
             $this->loadModuleData();
@@ -113,6 +139,7 @@ abstract class ModuleBasePresenter extends  BasePresenter
             if($this->module){
                 $this->module->settings = $this->context->modulesSettings->findBy(array("module_id" => $this->module->id));
             }
+            $this->template->module = $this->module;
         }
     }
 
@@ -245,5 +272,9 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
         $this->flashMessage('Nastavení bylo uloženo.');
         $this->redirect('Page:edit', array('id' => $this->params['parent_page_id']));
+    }
+
+    public function getPathToImages(){
+        return __DIR__ . "/../../../www/" . '/images/module' . $this->moduleName . '/';
     }
 }
