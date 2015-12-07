@@ -28,12 +28,22 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $this->loadPage();
 
             $this->settings = $this->context->settings->getAll();
+            $this->setLayoutVariale();
 
             if(isset($this->template)){
                 $this->template->settings = $this->settings;
                 $this->template->menu = $this->getMenu();
             }
             $this->cache->save('pages', $this->pages);
+    }
+
+    private function setLayoutVariale()
+    {
+        if(!isset($this->settings["layout"]) ||
+           !file_exists(__DIR__ . "/../templates/layouts/" . $this->settings["layout"] . "/@layout.latte")
+        ){
+            $this->settings["layout"] = "default";
+        }
     }
 
     public function loadPage(){
