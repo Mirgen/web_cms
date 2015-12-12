@@ -31,6 +31,12 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
     protected $db = NULL;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setModuleName();
+    }
+
     private function loadTemplate()
     {
         if(isset($this->templateFile) && !empty($this->templateFile))
@@ -63,6 +69,8 @@ abstract class ModuleBasePresenter extends  BasePresenter
     protected function startup() {
         parent::startup();
 
+        $this->setDB();
+
         if($this->getParameter('moduleid')){
             $this->iModuleId = $this->getParameter('moduleid');
             $this->loadModuleFromDB();
@@ -74,6 +82,8 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
     public function load($iModuleId, $oParentPresenter = NULL){
         $this->oParentPresenter = $oParentPresenter;
+        $this->setDB();
+
         if($this->oParentPresenter != NULL)
         {
             $this->iModuleId = $iModuleId;
@@ -108,9 +118,7 @@ abstract class ModuleBasePresenter extends  BasePresenter
             $this->module = $this->context->pageModuleRegister->getModule($this->iModuleId);
         }
 
-        $this->setModuleName();
         $this->loadModuleSettings();
-        $this->setDB();
 
         if($this->oParentPresenter){
             $this->loadModuleData();
@@ -135,6 +143,8 @@ abstract class ModuleBasePresenter extends  BasePresenter
 
         if(isset($context->{$DBModel})){
             $this->db = $context->{$DBModel};
+        } else {
+            \Tracy\Debugger::dump("ERROR: Model '" . $DBModel . "' v contextu neexistuje!");
         }
     }
 
