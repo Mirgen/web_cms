@@ -20,13 +20,27 @@
         {/if}
     </div>
     <div class="panel-body">
-        {if $module->settings->count() > 0}
-            <div class="page-header">
-                <h2>Nastavení</h2>
-                {$settingsForm}
+        <ul class="nav nav-tabs module-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#mod-{$module->id}-settings" aria-controls="#mod-{$module->id}-home" role="tab" data-toggle="tab">Nastavení</a></li>
+            {if $content != ""}
+                <li role="presentation"><a href="#mod-{$module->id}-content" aria-controls="#mod-{$module->id}-content" role="tab" data-toggle="tab">Obsah</a></li>
+            {/if}
+        </ul>
+
+        <div class="tab-content">
+            <div role="tab" class="tab-pane active" id="mod-{$module->id}-settings">
+                {if $module->settings->count() > 0}
+                    <div class="page-header">
+                        {$settingsForm}
+                    </div>
+                {/if}
             </div>
-        {/if}
-        {$content}
+            {if $content != ""}
+                <div role="tab" class="tab-pane" id="mod-{$module->id}-content">
+                    {$content}
+                </div>
+            {/if}
+        </div>
     </div>
     <div class="panel-footer">
         {if ($module->enabled)}
