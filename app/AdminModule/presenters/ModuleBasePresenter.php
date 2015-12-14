@@ -275,6 +275,6 @@ abstract class ModuleBasePresenter extends  BasePresenter
     }
 
     public function getPathToImages(){
-        return __DIR__ . "/../../../www/" . '/images/module' . $this->moduleName . '/';
+        return IMG_DIR . "/module" . $this->moduleName . '/';
     }
 }
