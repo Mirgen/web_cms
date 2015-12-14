@@ -198,6 +198,7 @@ INSERT INTO `page_modules` (`id`, `name`, `class_name`, `enabled`) VALUES
 (9,	'Piktogramy',	'ModulePictograms',	1),
 (10,	'Vložit kód do stránky',	'ModuleInsertCode',	1),
 (11,	'Prezentace Bootstrap (v.3)',	'ModuleCarouselBootstrap3',	1);
+(12,	'Jednoduchý Eshop',	'ModuleSimpleEshop',	1);
 
 DROP TABLE IF EXISTS `page_modules_instance`;
 CREATE TABLE `page_modules_instance` (
@@ -243,3 +244,57 @@ CREATE TABLE `settings` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+INSERT INTO page_modules (name, class_name, enabled) 
+VALUES ('Jednoduchý Eshop', 'ModuleSimpleEshop', 1);
+
+CREATE TABLE IF NOT EXISTS `module_simpleeshop_products` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `page_page_modules_id` int(11) unsigned NOT NULL,
+  `title` varchar(128) NOT NULL,
+  `description` text,
+  `price` double DEFAULT NULL,
+  `discount_percentage` int(3) DEFAULT NULL,
+  `discount_amount` double DEFAULT NULL,
+  `enabled` int(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `page_page_modules_id` (`page_page_modules_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `module_simpleeshop_products`
+  ADD CONSTRAINT `module_simpleeshop_products_ibfk_1` FOREIGN KEY (`page_page_modules_id`) REFERENCES `page_modules_instance` (`id`) ON DELETE CASCADE;
+
+CREATE TABLE IF NOT EXISTS `module_simpleeshop_images` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) unsigned NOT NULL,
+  `filename` varchar(128) NOT NULL,
+  `file_extension` varchar(4) NOT NULL,
+  `main` int(1) NOT NULL DEFAULT '0',
+  `enabled` int(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `module_simpleeshop_images`
+  ADD CONSTRAINT `module_simpleeshop_images_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `module_simpleeshop_products` (`id`) ON DELETE CASCADE;
+
+
+CREATE TABLE IF NOT EXISTS `module_simpleeshop_orders` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `page_page_modules_id` int(11) unsigned NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `surname` varchar(256) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `city` varchar(256) NOT NULL,
+  `street` varchar(256) NOT NULL,
+  `zip_code` varchar(6) NOT NULL,
+  `product_id` int(11) unsigned NOT NULL,
+  `product_title` varchar(128) NOT NULL,
+  `processed` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  KEY `page_page_modules_id` (`page_page_modules_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+
+ALTER TABLE `module_simpleeshop_orders`
+  ADD CONSTRAINT `module_simpleeshop_orders_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `module_simpleeshop_products` (`id`);

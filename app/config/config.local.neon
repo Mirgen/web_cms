@@ -24,3 +24,4 @@ services:
         moduleCarouselBootstrap3Model: App\Model\ModuleCarouselBootstrap3
         moduleMenuModel: App\Model\ModuleMenu
         moduleAutomaticHeaderModel: App\Model\ModuleAutomaticHeader
+        moduleSimpleEshopModel: App\Model\ModuleSimpleEshop

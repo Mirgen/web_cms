@@ -1,0 +1,24 @@
+<style>
+    .product h3{
+        font-size: 15px;
+        padding: 0;
+        margin: 10px 0 0 0;
+    }
+</style>
+
+<div class="container">
+    <div class="module-inner">
+        {foreach $products as $product}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 product">
+                <a n:href="{$module->class_name}:Product $product['nice_url_segment'], moduleid => $module->id" alt="{$product['title']}" title="{$product['title']}">
+                    {if isset($product['main_image'])}
+                        <img src="{$basePath}/images/moduleSimpleEshop/{$product['page_page_modules_id']}/{$product['id']}/{$product['main_image']['filename']}_t{$product['main_image']['file_extension']}" alt="{$product['title']}" title="{$product['title']}" class="img-thumbnail" />
+                    {/if}
+                    <h3>{$product['title']}</h3>
+                    <b>Cena: </b>{$product['final_price']|addCurrencyToPrice:$module->settings}
+                </a>
+            </div>
+        {/foreach}
+        <div class="clearboth"></div>
+    </div>
+</div>

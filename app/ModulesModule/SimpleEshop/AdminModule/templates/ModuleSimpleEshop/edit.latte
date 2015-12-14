@@ -1,0 +1,50 @@
+{block content}
+    <div class="container">
+        <h2>Úprava produktu</h2>
+        <div class="current-main-image">
+            {ifset $product['main_image']['filename']}
+                <div class="form-group">
+                    <div class="col-sm-3 control-label" style="text-align: right;">
+                        <label>
+                            <b>Hlavní obrázek: </b>
+                        </label>
+                    </div>
+                    <div class="col-sm-9">
+                        <img src="{$basePath}/images/moduleSimpleEshop/{$module->id}/{$product['id']}/{$product['main_image']['filename']}_t{$product['main_image']['file_extension']}" alt="{$product['title']}" title="{$product['title']}" class="img-thumbnail" />
+                    </div>
+                </div>
+            {/ifset}
+        </div>
+
+        {control editForm}
+
+        <div class="page-header">
+            <h2>Další obrázky {ifset $product['images']}<small>(celkem {count($product['images'])}){/ifset}</small></h2>
+            
+            {$addImagesForm}
+        </div>
+        {ifset $product['images']}
+            {foreach $product['images'] as $image}
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            {if isset($image['filename'])}
+                                <img src="{$basePath}/images/moduleSimpleEshop/{$module->id}/{$product['id']}/{$image['filename']}_t{$image['file_extension']}" alt="{$product['title']}" title="{$product['title']}" class="img-thumbnail" />
+                            {/if}
+                        </div>
+                        <div class="panel-footer">
+                            {if (1 == $image['enabled'])}
+                                <a n:href="{$module->class_name}:EnableDisableImage $image['id'], moduleid => $module->id" class="btn" alt="Zastavit zobrazování" title="Zastavit zobrazování"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span></a>
+                            {else}
+                                <span class="label label-danger">Nezobrazuje se.</span>
+                                <a n:href="{$module->class_name}:EnableDisableImage $image['id'], moduleid => $module->id" class="btn" alt="Opět zobrazovat" title="Opět zobrazovat"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                            {/if}
+                            <a n:href="{$module->class_name}:DeleteImage $image['id'], moduleid => $module->id" class="btn confirmation" alt="Smazat" title="Smazat"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                        </div>
+                    </div>
+                </div>
+            {/foreach}
+        {/ifset}
+    </div>
+{/block}
+

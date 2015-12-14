@@ -1,0 +1,62 @@
+<style>
+    .product h3{
+        font-size: 15px;
+        padding: 0;
+        margin: 10px 0 0 0;
+    }
+</style>
+
+<table>
+    <tr>
+        <td>
+            <img src="{$www}/images/{$web_setting["logo"]}" width="50" />
+        </td>
+        <td>
+            <h1 style="margin-top:15px; margin-left:50px; color: grey; font-family: verdana">{$web_setting["title"]}</h1>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <br />
+            <p style="font-size: 20px">
+                Zakoupili jste u nas produkt <b>{$order->product_title}</b>.
+            </p>
+            <br />
+        </td>
+    </tr>
+    <tr valign="top" cellpadding="10"  cellspacing="10">
+        <td>
+            <h2>Vaše údaje</h2>
+            {$order->name}<br />
+            {$order->surname}<br />
+            {$order->email}<br />
+            {$order->city}<br />
+            {$order->street}<br />
+            {$order->zip_code}<br />
+        </td>
+        <td valign="top">
+            <h2>Produkt</h2>
+            <img src="{$product['img_link']}" width="200" /><br />
+            <a href="{$product["link"]}" target="_blank">
+                {$product["title"]}<br />
+            </a>
+            {$product['final_price']|addCurrencyToPrice:$module->settings}<br />
+            {if $product['price'] != $product['final_price']}
+                Ušetříte: {$product['discount']|addCurrencyToPrice:$module->settings}<br />
+            {/if}
+            {$product["description"]|noescape}<br />
+            <a href="{$product["link"]}" target="_blank">
+                Odkaz na produkt
+            <a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <br />
+            <hr />
+            <a href="{$www}">{ifset $web_setting["title"]}<b>{$web_setting["title"]}</b><br />{/ifset}</a>
+            {ifset $web_setting["description"]}{$web_setting["description"]}<br /><br />{/ifset}
+            <b>{ifset $web_setting["email"]}{$web_setting["email"]}{else}{$module->settings->email}{/ifset}</b>
+        </td>
+    </tr>
+</table>

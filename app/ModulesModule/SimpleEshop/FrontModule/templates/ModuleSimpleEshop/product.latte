@@ -1,0 +1,84 @@
+{block head}
+    <style>
+        @media (min-width:992px){
+            .product-details {
+                position: fixed;
+                top: 60px;
+                padding: 20px;
+                width:450px;
+                /* Set the fixed height of the footer here */
+                background-color: white;
+                z-index: 999;
+            }
+        }
+        .price {
+            text-align: center;
+            font-size: 20px;
+            color: grey;
+        }
+        .price .original-price {
+            text-decoration: line-through;
+            color: red
+        }
+    </style>
+{/block}
+{block content}
+
+    <div class="container module">
+        <div class="current-main-image col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            {ifset $product['main_image']['filename']}
+                <div class="form-group">
+                    <img src="{$basePath}/images/moduleSimpleEshop/{$product['page_page_modules_id']}/{$product['id']}/{$product['main_image']['filename']}_th{$product['main_image']['file_extension']}" alt="{$product['title']}" title="{$product['title']}" class="img-thumbnail" />
+                </div>
+            {/ifset}
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="product-details">
+                <h2>{$product['title']}</h2>
+
+                {if $product['price'] > 0}
+                    <div class="price">
+                        <p>Cena: <b>{$product['final_price']|addCurrencyToPrice:$module->settings}</b>
+                            {if $product['price'] != $product['final_price']}
+                                <span class="original-price">({$product['price']|addCurrencyToPrice:$module->settings})</span>
+                                <p>Ušetříte: {$product['discount']|addCurrencyToPrice:$module->settings}</p>
+                            {/if}
+                        </p>
+                    </div>
+                {/if}
+
+                <p>{$product['description']|noescape}</p>
+                <a n:href="Default:Page 'id' => $module->page_url" alt="" title="" class="btn btn-primary">
+                    Zpět
+                </a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#buyForm">
+                    Koupit
+                </button>
+            </div>
+        </div>
+
+        <div class="images pull-left" style="text-align: left;">
+            {ifset $product['images']}
+                {foreach $product['images'] as $image}
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pull-left">
+                        {if isset($image['filename'])}
+                            <img src="{$basePath}/images/moduleSimpleEshop/{$product['page_page_modules_id']}/{$product['id']}/{$image['filename']}_th{$image['file_extension']}" alt="{$product['title']}" title="{$product['title']}" class="img-thumbnail" />
+                        {/if}
+                    </div>
+                {/foreach}
+            {/ifset}
+        </div>
+    </div>
+
+    {include buyForm.latte}
+{/block}
+
+{block scripts}
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            $('#buyForm').on('shown.bs.modal', function () {
+              //$('#myInput').focus();
+            });
+        });
+    </script>
+{/block}
