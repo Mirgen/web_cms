@@ -23,6 +23,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     protected function startup() {
             parent::startup();
+            $this->setPaths();
             $this->cache = new Cache(new Nette\Caching\Storages\FileStorage('../temp'));
 
             $this->loadPage();
@@ -67,8 +68,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
     }
 
-    public function getSettings($name) {
-            return $this->settings[$name];
+    public function getSetting($name) {
+        return $this->settings[$name];
+    }
+
+    public function getSettings(){
+        return $this->settings;
     }
 
     public function loadModules(){
@@ -80,5 +85,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $modules[] = $module_instance->load($module->id, $this);
         }
         return $modules;
+    }
+
+    private function setPaths(){
+        define("WWW_DIR", realpath(__DIR__ . "/../../../www/"));
+        define("APP_DIR", realpath(__DIR__ . "/../../"));
+        define("IMG_DIR", realpath(WWW_DIR . "/images/"));
     }
 }
