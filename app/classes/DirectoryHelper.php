@@ -32,7 +32,7 @@ class DirectoryHelper
         if (is_dir($dirPath)) {
             $files = array_diff(scandir($dirPath), array('.','..'));
             foreach ($files as $file) {
-              (is_dir($dirPath . $file)) ? deleteDirectory($dirPath . $file) : unlink($dirPath . $file);
+              (is_dir($dirPath . $file)) ? DirectoryHelper::deleteDirectory($dirPath . "/" . $file) : unlink($dirPath . "/" . $file);
             }
             return rmdir($dirPath);
         }
