@@ -29,6 +29,7 @@ class WebSettingsPresenter extends BasePresenter
         $form->addText('title', 'Titulek stránky', 64);
         $form->addText('description', 'Popis stránky', 256);
         $form->addText('keywords', 'Klíčová slova stránky', 512);
+        $form->addText('email', 'Hlavní e-mail', 512);
         $form->addText('layout', 'Layout', 6);
         $form->addSubmit('addPage', 'Uložit');
 
@@ -46,6 +47,7 @@ class WebSettingsPresenter extends BasePresenter
         $settings['keywords'] = $values['keywords'];
         $settings['description'] = $values['description'];
         $settings['layout'] = $values['layout'];
+        $settings['email'] = $values['email'];
 
         if(0 == $values['logo']->error){
             $imageUploader = new \ImageUploader($this->request->getFiles());
