@@ -1,36 +1,13 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of RedirectionsRoute
  *
  * @author Jiri Kvapil
  */
 class RedirectionsRoute extends \Nette\Application\Routers\Route
 {
     /* table of redirections: */
-    private $redirections = array(
-        "reference"                 => 28,
-        "materialy-a-technologie"   => 19,
-        "nabytek-na-miru"           => 11,
-        "o-mne"                     => 19,
-        "kontakt"                   => 18,
-        "kuchyne-a-kuchynske-linky-na-miru" => 12,
-        "obyvaci-pokoje-na-miru"    => 13,
-        "loznice-a-postele"         => 15,
-        "koupelny-na-miru"          => 14,
-        "vybaveni-kancelari"        => 30,
-        "nabytek-do-kancelare"      => 30,
-        "lekarny-a-ambulance"       => 32,
-        "detsky-nabytek"            => 33,
-        "ostatni-nabytek-a-dalsi-vyrobky"  => 34,
-        "nabytek-do-ostatnich-prostor"  => 34,
-    );
+    private $redirections = array();
 
     public function match(\Nette\Http\IRequest $httpRequest)
     {
