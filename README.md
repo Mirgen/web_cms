@@ -23,7 +23,7 @@ Instalation
 
 Modules
 ---------------------------------------------------------
-Available web modules, which you can use to build your web site.
+Available web modules, which you can use to build your web site. Up-to-date list of available modules can be found under /ModulesModule/.
 
 1. Text on your web
 2. Contact form
@@ -35,7 +35,11 @@ Available web modules, which you can use to build your web site.
 8. Insert code
 9. Insert google maps
 10. Slideshow - image/text presentation
-11. E-mail gatherer - newsleter, gather e-mail of your visitors who wants to have news from you via e-mails 
+11. E-mail gatherer - newsleter, gather e-mail of your visitors who wants to have news from you via e-mails
+12. Header with logo and menu
+13. Menu - very dynamic menu, you can add links to your site, to module or external links
+14. Social Footer - footer with links for Facebook, Twitter, Instagram 
+15. Simple eshop - you can add productw with images, prize, sale, customers can buy them and both client and you will get email with order
 
 Sub modules/features you can use
 ---------------------------------------------------------
