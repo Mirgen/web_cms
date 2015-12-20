@@ -1,0 +1,36 @@
+
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{ifset $title}{block title|striptags}{$title}{/block} | {/ifset}{block title_general|striptags}{ifset $settings['title_general']}{$settings['title_general']}{/ifset}{/block}</title>
+    <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
+    <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/carousel.css">
+    <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/colorbox.css">
+    <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
+    <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+    {block head}{/block}
+</head>
+
+<body>
+    <script> document.documentElement.className+=' js' </script>
+
+    {include '../../../../templates/flashMessages.latte'}
+    {ifset #content}{include content}{/ifset}
+
+    <script src="{$basePath}/js/jquery.js"></script>
+    <script src="{$basePath}/js/netteForms.js"></script>
+    <script src="{$basePath}/js/jquery.colorbox-min.js"></script>
+    <script src="{$basePath}/js/jquery.colorbox-cs.js"></script>
+    <script src="{$basePath}/js/bootstrap.min.js"></script>
+    <script src="{$basePath}/js/main.js"></script>
+    {block scripts}
+    {/block}
+</body>
+</html>
