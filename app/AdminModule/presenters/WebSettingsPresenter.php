@@ -17,7 +17,8 @@ class WebSettingsPresenter extends BasePresenter
 
     public function renderDefault()
     {
-
+        $LayoutHelper = new \App\Model\Layout\LayoutHelper();
+        $this->template->layoutList = $LayoutHelper->getLayouts();
     }
 
     protected function createComponentSettings()
@@ -25,12 +26,23 @@ class WebSettingsPresenter extends BasePresenter
         $form = new \CustomForm();
         $form->addUpload('logo', 'Logo')
                 ->addCondition(\Nette\Application\UI\Form::FILLED)
-                    ->addRule(\Nette\Application\UI\Form::IMAGE, 'Soubor musí být JPEG, PNG nebo GIF.');
+                ->addRule(\Nette\Application\UI\Form::IMAGE, 'Soubor musí být JPEG, PNG nebo GIF.');
         $form->addText('title', 'Titulek stránky', 64);
         $form->addText('description', 'Popis stránky', 256);
         $form->addText('keywords', 'Klíčová slova stránky', 512);
         $form->addText('email', 'Hlavní e-mail', 512);
-        $form->addText('layout', 'Layout', 6);
+
+        $LayoutHelper = new \App\Model\Layout\LayoutHelper();
+        $currentLayout = $LayoutHelper->loadLayout($this->settings["layout"]);
+        $form->addHidden("layout");
+        $form->addText('layoutVisible', 'Layout')
+                ->setDisabled()
+                ->setValue($currentLayout->getTitle());
+
+        $form->addSubmit('setLayout', 'Vybrat jiný layout')
+                ->setAttribute("data-toggle", "modal")
+                ->setAttribute("data-target", "#layoutWizard")
+                ->setAttribute("type", "button");
         $form->addSubmit('addPage', 'Uložit');
 
         $form->setDefaults($this->settings);

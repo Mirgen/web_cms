@@ -1,0 +1,23 @@
+<div class="layout-wizzard-item">
+    <h1><span>{$iterator->counter}/{$total}</span>. {$layout->getTitle()}</h1>
+    <h2>{$layout->getSubTitle()}<a href="#" id="{$layout->getName()}" title="{$layout->getTitle()}" class="btn btn-success selectLayout" data-dismiss="modal">Vybrat</a></h2>
+    <p>{$layout->getDescription()}</p>
+    <div class="images" id="{$layout->getName()}">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 mainImageContainer">
+            <img src="{$layout->getMainImage()}" title="" alt="" class="mainImage" />
+        </div>
+        {foreach $layout->getImages() as $image}
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">
+                <img src="{$image}" title="" alt="" class="thumbImage thumbnail" />
+            </div>
+        {/foreach}
+    </div>
+    <div class="clearfix"></div>
+    <hr />
+    <div class="footer">
+        <b>Author:</b> {$layout->getAuthor()}, 
+        {$layout->getAuthorEmail()}, 
+        <b>version:</b> {$layout->getVersion()}, 
+        <b>created:</b> {$layout->getCreationDate()}
+    </div>
+</div>

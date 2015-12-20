@@ -1,0 +1,30 @@
+{ifset $layoutList}
+    <div class="modal fade" id="layoutWizard" tabindex="-1" role="dialog" aria-labelledby="buyFormLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        {foreach $layoutList as $layout}
+                            <li data-target="#carousel-example-generic" data-slide-to="{$iterator->counter}" class="{if $layout->getName() == $settings["layout"]}active{/if}"></li>
+                        {/foreach}
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        {foreach $layoutList as $layout}
+                            <div class="item{if $layout->getName() == $settings["layout"]} active{/if}">
+                                {include 'layout-wizzard-item.latte', 'layout' => $layout, 'iterator' => $iterator, 'total' => count($layoutList)}
+                            </div>
+                        {/foreach}
+                    </div>
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{/ifset}
