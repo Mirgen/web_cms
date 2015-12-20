@@ -53,7 +53,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         if(!isset($this->settings["layout"]) ||
            !file_exists(__DIR__ . "/../templates/layouts/" . $this->settings["layout"] . "/@layout.latte")
         ){
-            $this->settings["layout"] = "default";
+            $this->settings["layout"] = "Basic";
         }
     }
 
