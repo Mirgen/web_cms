@@ -12,11 +12,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     /** @var array */
     protected $settings;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setPaths();
+    }
+
     protected function startup() {
         parent::startup();
 
         $this->loadSettings();
-        $this->setPaths();
         $this->template->title = "Administrace";
         $this->template->latestPages = $this->getLatestPages();
 
