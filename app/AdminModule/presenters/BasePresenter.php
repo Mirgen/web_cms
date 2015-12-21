@@ -15,14 +15,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     protected function startup() {
         parent::startup();
 
+        $this->loadSettings();
         $this->setPaths();
-
-        $settings = $this->context->settings->getAll();
         $this->template->title = "Administrace";
-
-        $this->settings = $settings;
-        $this->template->settings = $settings;
-
         $this->template->latestPages = $this->getLatestPages();
 
         /* If user is not logged in, force him to sign in first!! */
@@ -31,6 +26,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         } else {
             $this->template->user = $this->getUser();
         }
+    }
+
+    /**
+     * Load global settings of site, like description, keyword, etc.
+     */
+    private function loadSettings(){
+        $this->settings = $this->context->settings->getAll();
+        $this->template->settings = $this->settings;
     }
 
     private function setPaths(){
