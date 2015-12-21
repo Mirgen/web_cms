@@ -41,12 +41,12 @@ abstract class LayoutAbstract implements ILayout
     private $translations = array();
 
     public function __construct($layoutsDir, $lang = NULL){
-        $this->setLanguage($lang);
         $this->setName();
         $this->setPath($layoutsDir);
+        $this->setLanguage($lang);
+        $this->loadTranslations();
         $this->setSegments();
         $this->loadSettings();
-        $this->loadTranslations();
         $this->loadImages();
     }
 
@@ -109,7 +109,7 @@ abstract class LayoutAbstract implements ILayout
             $this->subTitle = $this->translate("subTitle");
             $this->description = $this->translate("description");
         } else {
-            throw new Exception("File 'setting.php' is not in expected path: '" . $path . "'.");
+            throw new Exception("File not found: '" . $path . "'.");
         }
     }
 
@@ -154,7 +154,10 @@ abstract class LayoutAbstract implements ILayout
      */
     private function setSegments(){
         if(file_exists($this->path . "/segments.php")){
-            $this->segments = include($this->path . "/segments.php");
+            $segments = include($this->path . "/segments.php");
+            foreach($segments as $segment){
+                $this->segments[] = new Segment($segment, $this->translate($segment));
+            }
         } else {
             throw new Exception("File 'segments.php' is not in expected path: '" . $this->path . "/segments.php" . "'.");
         }

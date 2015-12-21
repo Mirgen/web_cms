@@ -28,6 +28,18 @@
                     <li><a n:href="Page:add">Přidat novou</a></li>
                 </ul>
             </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layout bloky<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    {if !empty($settings['layout']->getSegments())}
+                    {foreach $settings['layout']->getSegments() as $segment}
+                        <li><a n:href="Layout:edit, id => $segment->getId()">{$segment->getName()}</a></li>
+                    {/foreach}
+                    {else}
+                        <li class="dropdown-header">Žádné bloky nejsou k dispozici</li>
+                    {/if}
+                </ul>
+            </li>
         </ul>
         <a n:href="Sign:out" class="btn btn-danger navbar-btn pull-right" style="color:white">Odhlásit</a>
         <p class="navbar-text pull-right">Uživatel {$user->getId()}</p>
