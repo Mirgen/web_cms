@@ -26,7 +26,7 @@
     {include '../../../../templates/flashMessages.latte'}
     {ifset #content}{include content}{/ifset}
 
-    {ifset #header}{include footer}{/ifset}
+    {ifset #footer}{include footer}{/ifset}
 
     {block scripts}
     <script src="{$basePath}/js/jquery.js"></script>
