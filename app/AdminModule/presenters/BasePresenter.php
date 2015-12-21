@@ -41,10 +41,19 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->settings = $this->settings;
     }
 
+    /**
+     * Set global paths. Paths, which are frequently used.
+     */
     private function setPaths(){
-        define("WWW_DIR", realpath(__DIR__ . "/../../../www/"));
-        define("APP_DIR", realpath(__DIR__ . "/../../"));
-        define("IMG_DIR", realpath(WWW_DIR . "/images/"));
+        if(!defined("WWW_DIR")){
+            define("WWW_DIR", realpath(__DIR__ . "/../../../www/"));
+        }
+        if(!defined("APP_DIR")){
+            define("APP_DIR", realpath(__DIR__ . "/../../"));
+        }
+        if(!defined("IMG_DIR")){
+            define("IMG_DIR", realpath(WWW_DIR . "/images/"));
+        }
     }
 
     private function getLatestPages(){
