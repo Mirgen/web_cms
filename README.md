@@ -55,13 +55,13 @@ Layouts - structure
 ---------------------------------------------------------
 This is structure of each layout. 
 
-    app/FrontModule/templates/layouts/NameOfSpecificLayout/languages/cs-CZ.php
-                                                                    /en-GB.php
-                                                                    /...
     app/FrontModule/templates/layouts/NameOfSpecificLayout/NameOfSpecificLayoutLayout.php
                                                           /segments.php
                                                           /setting.php
                                                           /@layout.latte
+                                                          /languages/cs-CZ.php
+                                                                    /en-GB.php
+                                                                    /...
     www/layouts/NameOfSpecificLayout/css/...
                                     /js/...
                                     /images/1.jpg
