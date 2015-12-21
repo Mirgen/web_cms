@@ -10,7 +10,7 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         {foreach $layoutList as $layout}
-                            <div class="item{if $layout->getName() == $settings["layout"]} active{/if}">
+                            <div class="item{if $layout->getName() == $settings['layout']->getName()} active{/if}">
                                 {include 'layout-wizzard-item.latte', 'layout' => $layout, 'iterator' => $iterator, 'total' => count($layoutList)}
                             </div>
                         {/foreach}

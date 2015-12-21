@@ -38,6 +38,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     private function loadSettings(){
         $this->settings = $this->context->settings->getAll();
+
+        $LayoutHelper = new \App\Model\Layout\LayoutHelper();
+        $this->settings["layout"] = $LayoutHelper->loadLayout($this->settings["layout"]);
+
         $this->template->settings = $this->settings;
     }
 

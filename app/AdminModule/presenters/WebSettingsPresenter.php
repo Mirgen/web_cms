@@ -32,12 +32,10 @@ class WebSettingsPresenter extends BasePresenter
         $form->addText('keywords', 'Klíčová slova stránky', 512);
         $form->addText('email', 'Hlavní e-mail', 512);
 
-        $LayoutHelper = new \App\Model\Layout\LayoutHelper();
-        $currentLayout = $LayoutHelper->loadLayout($this->settings["layout"]);
         $form->addHidden("layout");
         $form->addText('layoutVisible', 'Layout')
                 ->setDisabled()
-                ->setValue($currentLayout->getTitle());
+                ->setValue($this->settings["layout"]->getTitle());
 
         $form->addSubmit('setLayout', 'Vybrat jiný layout')
                 ->setAttribute("data-toggle", "modal")
@@ -45,7 +43,9 @@ class WebSettingsPresenter extends BasePresenter
                 ->setAttribute("type", "button");
         $form->addSubmit('addPage', 'Uložit');
 
-        $form->setDefaults($this->settings);
+        $defaults = $this->settings;
+        $defaults["layout"] = $this->settings["layout"]->getName();
+        $form->setDefaults($defaults);
         $form->onSuccess[] = array($this, 'addPageModuleToPageFormSucceeded');
         $form->setCustomRenderer();
         return $form;
