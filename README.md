@@ -39,7 +39,7 @@ Available web modules, which you can use to build your web site. Up-to-date list
 12. Header with logo and menu
 13. Menu - very dynamic menu, you can add links to your site, to module or external links
 14. Social Footer - footer with links for Facebook, Twitter, Instagram 
-15. Simple eshop - you can add productw with images, prize, sale, customers can buy them and both client and you will get email with order
+15. Simple eshop - you can add productw with images, price, sale, customers can buy them and both client and you will get email with order
 
 Layouts
 ---------------------------------------------------------
