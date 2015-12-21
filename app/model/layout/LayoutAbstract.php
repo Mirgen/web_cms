@@ -38,6 +38,8 @@ abstract class LayoutAbstract implements ILayout
 
     private $lang = "cs-CZ";
 
+    private $translations = array();
+
     public function __construct($layoutsDir, $lang = NULL){
         $this->setLanguage($lang);
         $this->setName();
@@ -84,6 +86,14 @@ abstract class LayoutAbstract implements ILayout
         }
     }
 
+    public function translate($string)
+    {
+        if(isset($this->translations[$string])){
+            return $this->translations[$string];
+        }
+        return  $string;
+    }
+
     /* 
      * This method loads translations for language given by $lang class 
      * variable. It also set variables title, subtitle, description.
@@ -91,11 +101,16 @@ abstract class LayoutAbstract implements ILayout
      * @return void
      */
     private function loadTranslations(){
-        $translations = include($this->path . "/languages/" . $this->lang . ".php");
+        $path = $this->path . "/languages/" . $this->lang . ".php";
+        if(file_exists($path)){
+            $this->translations = include($path);
 
-        $this->title = $translations["title"];
-        $this->subTitle = $translations["subTitle"];
-        $this->description = $translations["description"];
+            $this->title = $this->translate("title");
+            $this->subTitle = $this->translate("subTitle");
+            $this->description = $this->translate("description");
+        } else {
+            throw new Exception("File 'setting.php' is not in expected path: '" . $path . "'.");
+        }
     }
 
     /* 
@@ -105,12 +120,17 @@ abstract class LayoutAbstract implements ILayout
      * @return void
      */
     private function loadSettings(){
-        $settings = include($this->path . "/setting.php");
+        $path = $this->path . "/setting.php";
+        if(file_exists($path)){
+            $settings = include($path);
 
-        $this->author = $settings["author"];
-        $this->creationDate = $settings["creation_date"];
-        $this->version = $settings["version"];
-        $this->authorEmail = $settings["author_email"];
+            $this->author = $settings["author"];
+            $this->creationDate = $settings["creation_date"];
+            $this->version = $settings["version"];
+            $this->authorEmail = $settings["author_email"];
+        } else {
+            throw new Exception("File 'setting.php' is not in expected path: '" . $path . "'.");
+        }
     }
 
     /**

@@ -74,4 +74,11 @@ interface ILayout
      * @return string
      */
     public function getName();
+
+    /**
+     * Translate world given by parameter.
+     * @param string $string String to be translated.
+     * @return string
+     */
+    public function translate($string);
 }
