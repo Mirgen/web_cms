@@ -41,9 +41,49 @@ Available web modules, which you can use to build your web site. Up-to-date list
 14. Social Footer - footer with links for Facebook, Twitter, Instagram 
 15. Simple eshop - you can add productw with images, prize, sale, customers can buy them and both client and you will get email with order
 
-Sub modules/features you can use
+Layouts
 ---------------------------------------------------------
-Some features (CMS modules) are build on these but when you will create your own modules you DONT have to use them at all.
+As you know web sites can have several different layouts. For example layout with header, content and footer. Or layout with header, left menu, content on the right side and footer. 
+
+In this CMS there is confortable way how to create new layout and switch between available layouts. 
+
+On Web settings page in Admin you can choose which layout your website will use. After pressing one button you will see confortable Layout browser where you can choose your prefered layout. 
+
+For now we can set layout globaly for whole web. Next step (TODO) will be possibility to have layout per page (which will be easy to implement).
+
+Layouts - structure
+---------------------------------------------------------
+This is structure of each layout. 
+
+    app/FrontModule/templates/layouts/NameOfSpecificLayout/languages/cs-CZ.php
+                                                                    /en-GB.php
+                                                                    /...
+    app/FrontModule/templates/layouts/NameOfSpecificLayout/NameOfSpecificLayoutLayout.php
+                                                          /segments.php
+                                                          /setting.php
+                                                          /@layout.latte
+    www/layouts/NameOfSpecificLayout/images/1.jpg
+                                           /2.jpg
+                                           /...
+                                    /css/...
+                                    /js/...
+
+Where 
+- @layout.latte - is the most important, it have the layout with HTML elements like html, body, ... and have segments in it (like footer, header, content)
+- segments.php - in this file we can find array of segments this layout have (segments like footer, header, content, ...)
+- setting.php - array of informations about author, author email, version, etc.
+- NameOfSpecificLayoutLayout.php - this file will have name you will choose, name of your layout (eg. LeftMenuLayout), must follow name of the parent folder! Also must implement ILayout interface. So it is not mandatory to use segments, setting files. You just have to imeplement methods in ILayout.
+- /languages/ - in this folder you will have for each langugae you want to support array with informations such as title (name) of layout, subtitle, description.
+- www/layouts/ - in this folder you will have all the files like images, CSS, JS. In @layout.latte file you will link to these CSS and JS files.
+- www/layouts/NameOfSpecificLayout/images/ - this folder is for preview images of your layout, eg. layout scheme, preview of web with this layout, examples. These files will be seen in layout browser. So make them nice to attract users to your layout. :)
+
+I highly recommend you to look into existing layout like app/FrontModule/templates/layouts/Basic or app/FrontModule/templates/layouts/Blank. Just copy them, rename them and also rename file *Layout.php. Change setting, @layout.latte, settings.php, etc.
+
+If you will have new layout feel free to create pull-request. I will check it and gladly approve it.
+
+3rd party modules/features you can use
+---------------------------------------------------------
+Some modules mentioned above are build on these, but when you will create your own modules you DONT have to use them at all.
 
 PHP
 - Adminer - for your work with database (https://www.adminer.org/)
