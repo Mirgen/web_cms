@@ -55,7 +55,7 @@ class LayoutHelper
         if($class instanceof ILayout){
             return $class;
         } else {
-            throw new Exception("Class '" . $className . "' must be instance of ILayout.");
+            return NULL;
         }
     }
 

@@ -2,4 +2,4 @@
     Basicaly in this latte file we are loading current layout file given by
     $settings["layout"]. 
 *}
-{layout  "layouts/{$settings['layout']}/@layout.latte"}
+{layout  "layouts/{$settings['layout']->getName()}/@layout.latte"}

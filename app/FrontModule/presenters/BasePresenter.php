@@ -28,13 +28,23 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
             $this->loadPage();
 
-            $this->settings = $this->context->settings->getAll();
+            $this->loadSettings();
             $this->setLayoutVariale();
 
             if(isset($this->template)){
                 $this->template->settings = $this->settings;
             }
             $this->cache->save('pages', $this->pages);
+    }
+
+    /**
+     * Load global settings of site, like description, keyword, etc.
+     */
+    private function loadSettings(){
+        $this->settings = $this->context->settings->getAll();
+
+        $LayoutHelper = new \App\Model\Layout\LayoutHelper();
+        $this->settings["layout"] = $LayoutHelper->loadLayout($this->settings["layout"]);
     }
 
     /*
@@ -50,10 +60,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     private function setLayoutVariale()
     {
-        if(!isset($this->settings["layout"]) ||
-           !file_exists(__DIR__ . "/../templates/layouts/" . $this->settings["layout"] . "/@layout.latte")
+        if( !isset($this->settings["layout"]) ||
+            !file_exists(__DIR__ . "/../templates/layouts/" . $this->settings["layout"]->getName() . "/@layout.latte")
         ){
-            $this->settings["layout"] = "Basic";
+             $LayoutHelper = new \App\Model\Layout\LayoutHelper();
+            $this->settings["layout"] = $LayoutHelper->loadLayout("Basic");
         }
     }
 
